@@ -1,5 +1,6 @@
 <?php include 'includes/header.php';?>
 <?php include 'includes/navbar.php'; ?>
+<?php include 'includes/sidebar.php'; ?>
 
 <?php 
 include "includes/dbconfig.php";
@@ -11,9 +12,12 @@ $result = $dbconn->query($sql);
 
 ?>
 
+<div class="content-main">
+<h2>Customer Details</h2>
 
 	<div class="container">
-		<h2>Customer Details</h2>
+		
+		<div style="overflow-x:auto; overflow-y:auto;">
 <table class="table table-hover">
 	<thead>
 		<tr>
@@ -30,7 +34,7 @@ $result = $dbconn->query($sql);
         <th>Location</th>
         <th>Passport Expiry Date</th>
         <th>Driving License Expiry Date</th>
-        <th>How did you know about us?</th>
+        
         <th>Reference No</th>
         <th>Premium Customer</th>
 		
@@ -56,11 +60,18 @@ $result = $dbconn->query($sql);
                     <td><?php echo $row['location']; ?></td>
                     <td><?php echo $row['passport_expiry_date']; ?></td>
                     <td><?php echo $row['driving_license_expiry_date']; ?></td>
-                    <td><?php echo $row['how_did_know']; ?></td>
                     <td><?php echo $row['reference_no']; ?></td>
                     <td><?php echo $row['premium_customer']; ?></td>
 					
-					<td><a class="btn btn-info"  href="update-customer.php?cust_id=<?php echo $row['cust_id']; ?>">Edit</a>&nbsp;<a class="btn btn-danger" href="delete-customer.php?cust_id=<?php echo $row['cust_id']; ?>">Delete</a></td>
+					<td><a class="btn btn-info"  href="update-customer.php?cust_id=<?php echo $row['cust_id']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+</a>
+
+<!-- <a class="btn btn-danger" href="delete-customer.php?cust_id=<?php echo $row['cust_id']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i>
+</a> -->
+
+</td>
+					<td><a class="btn btn-danger" href="delete-customer.php?cust_id=<?php echo $row['cust_id']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i>
+</a></td></td>
 					</tr>	
 					
 		<?php		}
@@ -69,6 +80,8 @@ $result = $dbconn->query($sql);
 	        	
 	</tbody>
 </table>
+</div>
+	</div>
 	</div>
 	<?php include 'includes/footer.php';?>
 

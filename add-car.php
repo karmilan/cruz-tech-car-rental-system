@@ -27,6 +27,12 @@ if (isset($_POST['submit'])) {
    $image = $_POST['image'];
    $available = $_POST['available'];
 
+   // $image = $_FILES['image']['name'];
+    
+   //  $image_tmp = $_FILES['image']['tmp_name'];
+
+   //  move_uploaded_file($image_tmp,"../car_images/$image");
+
 
    $sql = "INSERT INTO `car`(`category`, `brand`, `model`, `carname`, `type`, `seatingcapacity`, `plateno`, `fueltype`, `fuelcapacity`, `manufactureyr`, `colour`, `hourlycharge`, `dailycharge`, `weeklycharge`, `monthlycharge`, `insurancecharge`,`details`,`branch`,`image`,`available`) VALUES ('$category','$brand','$model','$carname','$type', '$seatingcapacity', '$plateno', '$fueltype','$fuelcapacity','$manufactureyr','$colour','$hourlycharge', '$dailycharge','$weeklycharge','$monthlycharge','$insurancecharge','$details','$branch','$image','$available')";
 
@@ -44,6 +50,28 @@ if (isset($_POST['submit'])) {
 }
 
 ?>
+
+<?php
+include "includes/dbconfig.php";
+$target_dir = "car_images/";
+$target_file = $target_dir . basename($_FILES["image"]["name"]);
+$uploadOk = 1;
+$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+// Check if image file is a actual image or fake image
+if(isset($_POST["submit"])) {
+  $check = getimagesize($_FILES["image"]["tmp_name"]);
+  if($check !== false) {
+    echo "File is an image - " . $check["mime"] . ".";
+    $uploadOk = 1;
+  } else {
+    echo "File is not an image.";
+    $uploadOk = 0;
+  }
+  mysqli_close($dbconn);
+
+}
+?>
+
 
 <div class="content-main">
    <h3>add Car</h3>
@@ -127,46 +155,10 @@ if (isset($_POST['submit'])) {
                <label for="" class="form-label">Branch</label>
                <input type="text" class="form-control" name="branch"><br>
 
-               <?php
-               if (isset($_FILES['image'])) {
-                  $errors = array();
-                  $file_name = $_FILES['image']['name'];
-                  $file_size = $_FILES['image']['size'];
-                  $file_tmp = $_FILES['image']['tmp_name'];
-                  $file_type = $_FILES['image']['type'];
-                  //   $file_ext=strtolower(end(explode('.',$_FILES['image']['name'])));
-
-                  $exploded = explode('.', $_FILES['image']['name']);
-                  $file_ext = strtolower(end($exploded));
-
-                  $extensions = array("jpeg", "jpg", "png");
-
-                  if (in_array($file_ext, $extensions) === false) {
-                     $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
-                  }
-
-                  if ($file_size > 2097152) {
-                     $errors[] = 'File size must be excately 2 MB';
-                  }
-
-                  if (empty($errors) == true) {
-                     move_uploaded_file($file_tmp, "images/" . $file_name);
-                     echo "Success";
-                  } else {
-                     print_r($errors);
-                  }
-               }
-               ?>
+               
 
                <label for="" class="form-label">Image</label>
-               <input type="file" class="form-control" name="image" value="gg"><br>
-
-               <ul>
-                  <li>Sent file: <?php echo $_FILES['image']['name'];  ?>
-                  <li>File size: <?php echo $_FILES['image']['size'];  ?>
-                  <li>File type: <?php echo $_FILES['image']['type'] ?>
-                  <li>File : <?php echo $_FILES ?>
-               </ul>
+               <input type="file" class="form-control" name="image" id="image"><br>
 
                <label for="" class="form-label">Availability</label><br>
                <input type="radio" style="padding: 10px;" class="form-check-input mt-0" name="available" value="yes">Yes

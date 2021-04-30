@@ -17,8 +17,8 @@ body {
 <body>
 <div class="sidebar">
 <div class="sidenav">
-  <a href="http://localhost/car-rental/home.php"><i class="fa fa-fw fa-home"></i>Home</a>
-  <a href="http://localhost/car-rental/add-car.php"><i class="fa fa-car" aria-hidden="true"></i>
+  <a href="dashboard.php"><i class="fa fa-fw fa-home"></i>Home</a>
+  <a href="add-car.php"><i class="fa fa-car" aria-hidden="true"></i>
 Car</a>
 
 <button class="dropdown-btn"><i class="fa fa-fw fa-user"></i>Customer 
@@ -34,7 +34,7 @@ Car</a>
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="http://localhost/car-rental/add-driver.php">Driver Master</a>
+    <a href="add-driver.php">Driver Master</a>
     <a href="#">Driver History</a>
     
   </div>
@@ -43,7 +43,7 @@ Car</a>
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="http://localhost/car-rental/car-booking.php">Book a Car</a>
+    <a href="car-booking.php">Book a Car</a>
     <a href="#">Booking History</a>
     
   </div>
@@ -66,25 +66,16 @@ Car</a>
     <a href="#">Link 3</a>
   </div> -->
 
-  <a href="http://localhost/car-rental/add-mechanic.php"><i class="fa fa-fw fa-home"></i>Mechanic</a>
+  <a href="add-mechanic.php"><i class="fa fa-fw fa-home"></i>Mechanic</a>
 
 
   <button class="dropdown-btn"><i class="fa fa-fw fa-home"></i>Insurance 
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-    <a href="http://localhost/car-rental/add-insurance.php">Manage Insurance</a>
+    <a href="add-insurance.php">Manage Insurance</a>
     <a href="#">Insurance History</a>
     
-  </div>
-
-  <button class="dropdown-btn"><i class="fa fa-fw fa-home"></i>Traffic-Fine 
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
   </div>
 
   <button class="dropdown-btn"><i class="fa fa-fw fa-home"></i>Expense 
