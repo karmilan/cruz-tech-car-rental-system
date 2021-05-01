@@ -9,6 +9,11 @@
     font-size:12px;
 }
 
+.preview {
+  width: 100px;
+  height: auto;
+}
+
 /* Fixed sidenav, full height */
 .sidenav {
     height: 100%;

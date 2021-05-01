@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2021 at 03:58 PM
+-- Generation Time: May 01, 2021 at 06:48 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `booking` (
   `bookingid` int(10) NOT NULL,
-  `car_image` varchar(100) NOT NULL,
+  `car_image` varchar(100) DEFAULT NULL,
   `car_name` varchar(50) NOT NULL,
   `car_category` varchar(50) NOT NULL,
   `car_brand` varchar(50) NOT NULL,
@@ -47,13 +47,8 @@ CREATE TABLE `booking` (
 --
 
 INSERT INTO `booking` (`bookingid`, `car_image`, `car_name`, `car_category`, `car_brand`, `car_model`, `car_seatingcapacity`, `cust_drivinglicenseno`, `car_dailycharge`, `bookingdays`, `amount`, `bookingtime`) VALUES
-(1, 'wew', 'efvc', 'cf vbdc', 'fdvs', 'fsd', '3', 1233, 4, 3, 1000, '2021-04-25 14:41:47'),
-(12, '', 'bb', ' lx', 'b', 'l9', '8', 0, 6, 4, 24, '2021-04-25 16:32:38'),
-(13, '', 'ssssssss', 's', 'ss', 'sss', '6', 0, 3333, 2, 6666, '2021-04-25 16:34:05'),
-(14, '', 'bb', ' lx', 'b', 'l9', '8', 0, 6, 4, 24, '2021-04-25 18:59:03'),
-(15, '', 'bb', ' lx', 'b', 'l9', '8', 0, 6, 10, 60, '2021-04-25 19:42:37'),
-(16, '', 'bb', ' lx', 'b', 'l9', '8', 11111, 6, 8, 48, '2021-04-25 21:02:28'),
-(17, '', 'ccc23', 'Semi Luxury', 'bmw', 'z6', '4', 554553709, 2000, 2, 4000, '2021-04-27 19:50:58');
+(18, '', 'bb', 'Luxury', 'bmw', 'ee', '4', 11111, 0, 5, 0, '2021-04-30 22:00:03'),
+(19, '', 'bb', 'Luxury', 'bmw', 'ee', '4', 11111, 0, 5, 0, '2021-04-30 22:04:32');
 
 -- --------------------------------------------------------
 
@@ -90,12 +85,9 @@ CREATE TABLE `car` (
 --
 
 INSERT INTO `car` (`carid`, `category`, `brand`, `model`, `carname`, `type`, `seatingcapacity`, `plateno`, `fueltype`, `fuelcapacity`, `manufactureyr`, `colour`, `hourlycharge`, `dailycharge`, `weeklycharge`, `monthlycharge`, `insurancecharge`, `details`, `branch`, `image`, `available`) VALUES
-(1, ' lx', 'b', 'l9', 'bb', 'SUV', 8, '9', 'p', 5, 1997, 'hh', 7, 6, 8, 80, 800, '', 'kk', '', 'yes'),
-(4, '', 'ddd', 'dd', 'cc', 'Convertible', 4, '95', 'p', 0, 2021, '', 0, 0, 0, 0, 0, '', '', '', 'yes'),
-(5, 's', 'ss', 'sss', 'ssssssss', 'Crossover', 6, '6666', 'ssss', 222, 2021, 'sss', 444, 3333, 222, 1111, 44, '', 'ggg', 'restaurant-chief-food-hotel-logo-9DE9D03812-seeklogo.com.png', 'yes'),
-(6, 'ffgxdf', 'gfsdfehgr', 'trghrdthyrt', 'tgh4thyr56', 'Coupe', 4, '111', 'eee', 44, 2021, '', 0, 0, 0, 0, 0, '', '', '', 'yes'),
-(7, 'Semi Luxury', 'uyk', 'ky', 'kyiuik', 'Crossover', 6, '6666', 'yyyyyyy', 55, 2021, 'hhh', 8, 7, 5, 4, 55, 'hhh', 'jj', '', 'yes'),
-(8, 'Semi Luxury', 'bmw', 'z6', 'ccc23', 'SUV', 4, 'wp-9012', 'Petrol', 5, 1987, 'Black', 1000, 2000, 1500, 1200, 1000, 'nmwlk', 'col branch', '', 'yes');
+(12, 'Luxury', 'bmw', 'ee', 'bb', 'Sedan', 4, '444', 'Petrol', 5, 2021, 'hh', 7, 0, 0, 0, 0, '', '', '', 'yes'),
+(13, 'Luxury', 'bmw', 'ee', 'bb', 'Sedan', 4, '444', 'Petrol', 5, 2021, 'hh', 7, 0, 0, 0, 0, '', '', '', 'yes'),
+(19, 'Luxury', '', '', 'dcv', 'Sedan', 0, '', '', 0, 2021, '', 0, 0, 0, 0, 0, '', '', '', 'yes');
 
 -- --------------------------------------------------------
 
@@ -191,7 +183,8 @@ CREATE TABLE `mechanic` (
 --
 
 INSERT INTO `mechanic` (`mechanicid`, `companyname`, `mechanicname`, `contactno`, `companyaddress`) VALUES
-(2, 'Dilk', 'senthu', 778980765, 'jaffna');
+(2, 'Dilk', 'senthu', 778980765, 'jaffna'),
+(3, 'fdff', 'ess', 33, 'dssdf43');
 
 -- --------------------------------------------------------
 
@@ -272,13 +265,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `bookingid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `bookingid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `car`
 --
 ALTER TABLE `car`
-  MODIFY `carid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `carid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -302,7 +295,7 @@ ALTER TABLE `insurance`
 -- AUTO_INCREMENT for table `mechanic`
 --
 ALTER TABLE `mechanic`
-  MODIFY `mechanicid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `mechanicid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `user`

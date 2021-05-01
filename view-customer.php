@@ -7,6 +7,12 @@ include "includes/dbconfig.php";
 
 $sql = "SELECT * FROM customer";
 
+if( isset($_GET['search']) ){
+    $fullname = mysqli_real_escape_string($dbconn, htmlspecialchars($_GET['search']));
+
+    $sql = "SELECT * FROM customer WHERE fullname ='$fullname'";
+}
+
 $result = $dbconn->query($sql);
 
 
@@ -14,6 +20,25 @@ $result = $dbconn->query($sql);
 
 <div class="content-main">
 <h2>Customer Details</h2>
+
+<div class="input-group">
+  <div class="form-outline">
+
+<form action="" method="GET">
+<input type="text" placeholder="Type the name here" name="search" class="form-control">
+</div>
+
+
+<button type="submit" value="Search" name="btn" class="btn btn-sm btn-primary">
+<i class="fa fa-search"></i>
+</button> 
+
+&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="view-customer.php" class="btn btn-outline-success">View All</a>
+
+</form>
+</div>
+<br>
 
 	<div class="container">
 		
@@ -42,7 +67,7 @@ $result = $dbconn->query($sql);
 	</thead>
 	<tbody>	
 		<?php
-			if ($result->num_rows > 0) {
+			
 				while ($row = $result->fetch_assoc()) {
 		?>
 
@@ -74,7 +99,7 @@ $result = $dbconn->query($sql);
 </a></td></td>
 					</tr>	
 					
-		<?php		}
+		<?php		
 			}
 		?>
 	        	

@@ -24,8 +24,13 @@ if (isset($_POST['update'])) {
 	$insurancecharge = $_POST['insurancecharge'];
 	$details = $_POST['details'];
 	$branch = $_POST['branch'];
-	$image = $_POST['image'];
+	$image = $_FILES['image'];
 	$available = $_POST['available'];
+
+	// $image = $_FILES['image']['name'];
+    
+     $image_tmp = $_FILES['image']['tmp_name'];
+	 move_uploaded_file($image_tmp,"car_images/".$image);
 
 
 	$sql = "UPDATE `car` SET `category`='$category', `brand`='$brand', `model`='$model', `carname`='$carname', `type`='$type', `seatingcapacity`='$seatingcapacity', `plateno`='$plateno', `fueltype`='$fueltype', `fuelcapacity`='$fuelcapacity', `manufactureyr`='$manufactureyr', `colour`='$colour', `hourlycharge`='$hourlycharge', `dailycharge`='$dailycharge', `weeklycharge`='$weeklycharge', `monthlycharge`='$monthlycharge', `insurancecharge`='$insurancecharge', `details`='$details', `branch`='$branch', `image`='$image', `available`='$available' WHERE `carid`='$carid'";
@@ -161,7 +166,8 @@ if (isset($_GET['carid'])) {
 							<input type="text" class="form-control " name="branch" value="<?php echo $branch; ?>"><br>
 
 							<label for="" class="form-label">Image</label>
-							<input type="file" class="form-control" name="image" value="<?php echo $image; ?>"><br>
+							<img src="car_images/<?php echo $image; ?>"  class="preview">
+							<input type="file" class="form-control" name="image" value="car_images/<?php echo $image; ?>"><br>
 
 							<label for="" class="form-label">Availability</label><br>
 							<input type="radio" style="padding: 10px;" class="form-check-input mt-0" name="available" value="yes" <?php if ($available == 'yes') {

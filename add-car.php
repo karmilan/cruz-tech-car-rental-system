@@ -24,14 +24,17 @@ if (isset($_POST['submit'])) {
    $insurancecharge = $_POST['insurancecharge'];
    $details = $_POST['details'];
    $branch = $_POST['branch'];
-   $image = $_POST['image'];
+   // $image = $_POST['image'];
    $available = $_POST['available'];
 
-   // $image = $_FILES['image']['name'];
+   //   $targetpath = "../car_images/";
+    $image = $_FILES['image']['name'];
     
-   //  $image_tmp = $_FILES['image']['tmp_name'];
+     $image_tmp = $_FILES['image']['tmp_name'];
 
-   //  move_uploaded_file($image_tmp,"../car_images/$image");
+   //   move_uploaded_file($_FILES ['image']['tmp_name'],$targetpath);
+   //   move_uploaded_file($file_tmp, "driverimg/" . $file_name);
+     move_uploaded_file($image_tmp,"car_images/".$image);
 
 
    $sql = "INSERT INTO `car`(`category`, `brand`, `model`, `carname`, `type`, `seatingcapacity`, `plateno`, `fueltype`, `fuelcapacity`, `manufactureyr`, `colour`, `hourlycharge`, `dailycharge`, `weeklycharge`, `monthlycharge`, `insurancecharge`,`details`,`branch`,`image`,`available`) VALUES ('$category','$brand','$model','$carname','$type', '$seatingcapacity', '$plateno', '$fueltype','$fuelcapacity','$manufactureyr','$colour','$hourlycharge', '$dailycharge','$weeklycharge','$monthlycharge','$insurancecharge','$details','$branch','$image','$available')";
@@ -49,27 +52,6 @@ if (isset($_POST['submit'])) {
    mysqli_close($dbconn);
 }
 
-?>
-
-<?php
-include "includes/dbconfig.php";
-$target_dir = "car_images/";
-$target_file = $target_dir . basename($_FILES["image"]["name"]);
-$uploadOk = 1;
-$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
-// Check if image file is a actual image or fake image
-if(isset($_POST["submit"])) {
-  $check = getimagesize($_FILES["image"]["tmp_name"]);
-  if($check !== false) {
-    echo "File is an image - " . $check["mime"] . ".";
-    $uploadOk = 1;
-  } else {
-    echo "File is not an image.";
-    $uploadOk = 0;
-  }
-  mysqli_close($dbconn);
-
-}
 ?>
 
 

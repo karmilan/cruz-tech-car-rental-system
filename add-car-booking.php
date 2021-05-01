@@ -159,7 +159,7 @@ if (isset($_POST['submit'])) {
 
                     <br>
                     <label for="" class="form-label">Car img</label>
-                    <img src="..." class="card-img-top" alt="..." value="<?php echo $image; ?>" readonly>
+                    <img src="car_images/<?php echo $image; ?>" class="card-img-top" alt="..." >
                     <br>
 
                     <label for="" class="form-label">Car Name</label>

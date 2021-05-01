@@ -23,8 +23,8 @@ $result = $dbconn->query($sql);
             while ($row = $result->fetch_assoc()) {
         ?>
                 
-                <div class="card" style="width: 17rem; display: inline-block; margin-bottom: 20px;">
-                    <img src="..." class="card-img-top" alt="...">
+                <div class="card" style="width: 17rem; display: inline-block; margin: 10px;">
+                    <img src="car_images/<?php echo $row['image']; ?>" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $row['carname']; ?></h5>
                         <p class="card-text">Brand: <?php echo $row['brand']; ?></p>

@@ -26,7 +26,6 @@ $result = $dbconn->query($sql);
 <div class="input-group">
   <div class="form-outline">
 
-<!-- <label class="form-label">Search</label> -->
 <form action="" method="GET">
 <input type="text" placeholder="Type the name here" name="search" class="form-control">
 </div>
