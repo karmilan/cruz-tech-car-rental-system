@@ -1,3 +1,6 @@
+<?php
+   include('session.php');
+?>
 <?php include 'includes/header.php'; ?>
 <?php include 'includes/navbar.php'; ?>
 <?php include 'includes/sidebar.php'; ?>
@@ -124,17 +127,41 @@ if (isset($_POST['submit'])) {
     $car_seatingcapacity = $_POST['car_seatingcapacity'];
     $cust_drivinglicenseno = $_POST['cust_drivinglicenseno'];
     $car_dailycharge = $_POST['car_dailycharge'];
-    $bookingdays = $_POST['bookingdays'];
-    $amount = $_POST['car_dailycharge'] * $bookingdays;
+    $car_monthlycharge = $_POST['car_monthlycharge'];
+    $bookingdate = $_POST['bookingdate'];
+    $actual_returndate = $_POST['actual_returndate'];
+    $car_hourlycharge = $_POST['car_hourlycharge'];
+    // $amount = $_POST['car_dailycharge'] * $bookingdays;
+    
+    $date1=date_create($bookingdate);
+$date2=date_create($actual_returndate);
+$diff=date_diff($date1,$date2);
+
+$month=$diff->format("%m");
+$days=$diff->format("%d");
+$hour=$diff->format("%h");
+
+$mcharge=$car_monthlycharge*$month;
+$dcharge=$car_dailycharge*$days;
+$hcharge=$hourlycharge*$hour;
+$tot=$mcharge+$dcharge+$hcharge;
+$amount = $_POST['amount'].$tot;
+
+echo $month; echo "<br>";
+echo $days; echo "<br>";
+echo $hour; echo "<br>";
 
 
-    $sql = "INSERT INTO `booking`(`car_image`,`car_name`, `car_category`, `car_brand`, `car_model`,`car_seatingcapacity`, `cust_drivinglicenseno`, `car_dailycharge`,`bookingdays`, `amount`) VALUES ('$car_image','$car_name','$car_category','$car_brand','$car_model','$car_seatingcapacity','$cust_drivinglicenseno','$car_dailycharge','$bookingdays','$amount')";
+
+    $sql = "INSERT INTO `booking`(`car_image`,`car_name`, `car_category`, `car_brand`, `car_model`,`car_seatingcapacity`, `cust_drivinglicenseno`, `car_dailycharge`,`car_monthlycharge`,`bookingdate`,`actual_returndate`,`car_hourlycharge`, `amount`) VALUES ('$car_image','$car_name','$car_category','$car_brand','$car_model','$car_seatingcapacity','$cust_drivinglicenseno','$car_dailycharge','$car_monthlycharge','$bookingdate','$actual_returndate','$car_hourlycharge','$amount')";
 
 
     $result = $dbconn->query($sql);
 
     if ($result == TRUE) {
         echo '<script>alert("New Booking Added Successfully")</script>';
+        
+
     } else {
         echo "Error insertttt:" . $sql . "<br>" . $dbconn->error;
     }
@@ -177,17 +204,28 @@ if (isset($_POST['submit'])) {
                     <label for="" class="form-label">Car Seating Capacity</label>
                     <input type="text" class="form-control" name="car_seatingcapacity" value="<?php echo $seatingcapacity; ?>" readonly><br>
 
+                    <label for="" class="form-label">Car Hourly Charge</label>
+                    <input type="text" class="form-control" name="car_hourlycharge" value="<?php echo $hourlycharge; ?>" readonly><br>
+
                     <label for="" class="form-label">Car Daily Charge</label>
                     <input type="text" class="form-control" name="car_dailycharge" value="<?php echo $dailycharge; ?>" readonly><br>
+
+                    <label for="" class="form-label">Car Monthly Charge</label>
+                    <input type="text" class="form-control" name="car_monthlycharge" value="<?php echo $monthlycharge; ?>" readonly><br>
 
                     <label for="" class="form-label">Customer License No</label>
                     <input type="text" class="form-control" name="cust_drivinglicenseno"><br>
 
-                    <label for="" class="form-label">Booking Days</label>
-                    <input type="text" class="form-control" name="bookingdays"><br>
+                    <label for="" class="form-label">Booking Date</label>
+                    <input type="datetime-local" name="bookingdate" class="form-control"><br>
+
+                    <label for="" class="form-label">Return Date</label>
+                    <input type="datetime-local" name="actual_returndate" class="form-control"><br>
+
+                   
 
                     <!-- <label for="" class="form-label">Amount</label>
-                    <input type="text" class="form-control" name="amount" value="><br> -->
+                    <input type="text" class="form-control" name="amount" value=""><br> -->
 
 
                     <input type="submit" name="submit" value="Add" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

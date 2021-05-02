@@ -22,7 +22,7 @@
         
       </ul>
     </div>
-    <a type="button" class="btn btn-outline-info" href="index.php">Logout</a>
+    <a type="button" class="btn btn-outline-info" href="logout.php">Logout</a>
 
   </div>
 </nav>

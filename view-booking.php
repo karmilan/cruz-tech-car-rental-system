@@ -1,3 +1,5 @@
+<?php include('session.php'); ?>
+
 <?php include 'includes/header.php';?>
 <?php include 'includes/navbar.php'; ?>
 <?php include 'includes/sidebar.php';?>
@@ -25,9 +27,12 @@ $result = $dbconn->query($sql);
 		<th>Car Brand</th>
 		<th>Car Model</th>
         <th>Seating Capacity</th>
+		<th>Car Monthly Charge</th>
         <th>Car Daily Charge</th>
+		<th>Car Hourly Charge</th>
         <th>Customer License No</th>
-        <th>Booking Days</th>
+        <th>Booking Date</th>
+		<th>Return Date</th>
         <th>Amount</th>
 		
 	</tr>
@@ -46,10 +51,12 @@ $result = $dbconn->query($sql);
                     <td><?php echo $row['car_brand']; ?></td>
                     <td><?php echo $row['car_model']; ?></td>
 					<td><?php echo $row['car_seatingcapacity']; ?></td>
-					
+					<td><?php echo $row['car_monthlycharge']; ?></td>
 					<td><?php echo $row['car_dailycharge']; ?></td>
+					<td><?php echo $row['car_hourlycharge']; ?></td>
 					<td><?php echo $row['cust_drivinglicenseno']; ?></td>
-                    <td><?php echo $row['bookingdays']; ?></td>
+                    <td><?php echo $row['bookingdate']; ?></td>
+					<td><?php echo $row['actual_returndate']; ?></td>
                     <td><?php echo $row['amount']; ?></td>
 					
 					<td><a class="btn btn-info"  href="update-booking.php?bookingid=<?php echo $row['bookingid']; ?>">Edit</a>&nbsp;<a class="btn btn-danger" href="delete-booking.php?bookingid=<?php echo $row['bookingid']; ?>">Delete</a></td>
