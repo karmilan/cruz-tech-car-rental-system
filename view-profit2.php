@@ -21,7 +21,8 @@
 
             </div>
 
-        </form> <hr>
+        </form>
+        <hr>
 
         <div class="tbl-style" style="height:18rem;">
 
@@ -81,12 +82,15 @@
 		?>
                 </tbody>
             </table>
-        </div><hr>
+        </div>
+        <hr>
 
 
-        <!-- heheh -->
+        <!-- get data end -->
+
+
+        <!-- total amount calculaton -->
         <?php
-// include "includes/dbconfig.php";
 			if (isset($_POST['submit'])){
 				
 				$from=date('Y-m-d',strtotime($_POST['from']));
@@ -96,14 +100,14 @@
 				while($row = $oquery->fetch_array()){
 					?>
 
-<?php $total_amount = $row['total']; ?>
+        <?php $total_amount = $row['total']; ?>
 
         <div class="row">
 
             <div class="col-4">
 
                 <div class="card text-white bg-primary mb-3 dashboard-card" style="max-width: 18rem;">
-                <div class="card-header">Total Amount for Selected Date</div>
+                    <div class="card-header">Total Amount for Selected Date</div>
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
@@ -111,29 +115,92 @@
                                 </h4>
                                 <h6>from <?php echo $from; ?> to <?php echo $to; ?></h6>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
 
-            
 
-        </div>
 
-        <?php 
+
+            <?php 
 				}
 			}
             
 		?>
 
-        <!-- // -->
+            <!-- total amount calculaton -->
 
-        
 
+            <!-- expense calculation -->
+            <?php
+			if (isset($_POST['submit'])){
+				
+				$from=date('Y-m-d',strtotime($_POST['from']));
+				$to=date('Y-m-d',strtotime($_POST['to']));
+                $oquery=$dbconn->query("SELECT sum(expenseamount) as total FROM `expense` where expensedate between '$from' and '$to'");
+				while($row = $oquery->fetch_array()){
+					?>
+
+            <?php $expense_amount = $row['total']; ?>
+
+
+
+            <div class="col-4">
+
+                <div class="card text-white bg-primary mb-3 dashboard-card" style="max-width: 18rem;">
+                    <div class="card-header">Total expense Amount for Selected Date</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4> Rs.&nbsp;<?php echo $expense_amount; ?>
+                                </h4>
+                                <h6>from <?php echo $from; ?> to <?php echo $to; ?></h6>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <?php 
+				}
+			}
+            
+		?>
+            <!-- expense calculation end -->
+
+
+            <!-- total profit -->
+            <div class="col-4">
+
+                <div class="card text-white bg-primary mb-3 dashboard-card" style="max-width: 18rem;">
+                    <div class="card-header">Profit for Selected Date</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4> Rs.&nbsp;<?php echo $total_amount-$expense_amount; ?>
+                                </h4>
+                                <h6>from <?php echo $from; ?> to <?php echo $to; ?></h6>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- total profit end -->
     </div>
-    </div>
+</div>
 
 
 
-    <?php include 'includes/footer.php';?>
+<?php include 'includes/footer.php';?>

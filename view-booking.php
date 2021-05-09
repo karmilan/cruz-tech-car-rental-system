@@ -39,7 +39,7 @@ $result = $dbconn->query($sql);
                 </button>
 
                 &nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="view-car.php" class="btn btn-outline-success">View All</a>
+                <a href="view-booking.php" class="btn btn-outline-success">View All</a>
 
                 </form>
             </div>

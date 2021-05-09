@@ -32,7 +32,18 @@ $result = $dbconn->query($sql);
                         <p class="card-text">Brand: <?php echo $row['brand']; ?></p>
                         <p class="card-text">Type: <?php echo $row['type']; ?></p>
                         <p class="card-text">Seating Capacity: <?php echo $row['seatingcapacity']; ?></p>
-                        <a class="btn btn-info"  href="add-car-booking.php?carid=<?php echo $row['carid']; ?>">Book</a>
+                        <!-- <a class="btn btn-info"  href="add-car-booking.php?carid=<?php echo $row['carid']; ?>">Book</a> -->
+
+                        <div class="btn-group">
+  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    BOOK
+  </button>
+  <div class="dropdown-menu">
+  <a class="dropdown-item"  href="add-car-booking.php?carid=<?php echo $row['carid']; ?>">Self Driving</a>
+  <a class="dropdown-item"  href="add-car-booking-with-driver.php?carid=<?php echo $row['carid']; ?>">With Driver</a>
+  </div>
+</div>
+
                     </div>
                 </div> 
             </div>
