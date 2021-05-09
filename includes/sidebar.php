@@ -1,5 +1,5 @@
-<?php 
-include "includes/dbconfig.php";?>
+<?php include "includes/dbconfig.php";?>
+<?php include "includes/header.php";?>
 
 <!DOCTYPE html>
 <html>
@@ -78,13 +78,16 @@ Car</a>
     
   </div>
 
+  <a href="view-profit2.php"><i class="fa fa-fw fa-home"></i>Profit</a>
+
   <button class="dropdown-btn"><i class="fa fa-fw fa-home"></i>Expense 
     <i class="fa fa-caret-down"></i>
   </button>
+
+  
   <div class="dropdown-container">
-    <a href="#">Link 1</a>
-    <a href="#">Link 2</a>
-    <a href="#">Link 3</a>
+    <a href="add-expense.php">Manage Expense</a>
+    <a href="#">Expense History</a>
   </div>
 
   <button class="dropdown-btn"><i class="fa fa-fw fa-home"></i>Reports 

@@ -12,7 +12,9 @@ if (isset($_GET['bookingid'])) {
 	$result = $dbconn->query($sql);
 
 	if ($result == TRUE) {
-		echo '<script>alert("Booking Deleted Successfuly")</script>';
+		echo '<script>alert("Booking Deleted Successfuly")
+		window.location = "view-booking.php";
+		</script>';
 	}else{
 		echo "Error:" . $sql . "<br>" . $dbconn->error;
 	}
@@ -20,4 +22,3 @@ if (isset($_GET['bookingid'])) {
 
 ?>
 
-<?php include "view-booking.php"; ?>

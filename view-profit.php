@@ -1,49 +1,29 @@
-<?php include('session.php'); ?>
-
 <?php include 'includes/header.php';?>
 <?php include 'includes/navbar.php'; ?>
-<?php include 'includes/sidebar.php'; ?>
 
-<?php 
-include "includes/dbconfig.php";
-
-$sql = "SELECT * FROM booking";
-
-if( isset($_GET['search']) ){
-    $bookingid = mysqli_real_escape_string($dbconn, htmlspecialchars($_GET['search']));
-
-    $sql = "SELECT * FROM booking WHERE bookingid ='$bookingid'";
-}
-
-$result = $dbconn->query($sql);
-
-
-?>
+<!-- get data betwee dates -->
 
 <div class="content-main">
     <div class="container">
-        <h2>Booking Details</h2>
+
+        <form method="POST">
+            
+                    <div class="input-group" style="width: 65%; font-size: 20px;">
+                        <label class="form-label">From: </label>&nbsp;
+                        <input class="form-control" type="date" name="from">&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                        <label class="form-label"> To: </label>&nbsp;
+                        <input class="form-control" type="date" name="to">&nbsp; 
+                        <input class="btn btn-success" type="submit" value="Get Data" name="submit">
+                    </div>
+
+        </form><br>
 
         <div class="tbl-style">
 
-            <div class="input-group">
-                <div class="form-outline">
+            <h4>Data Between Selected Dates</h4>
 
-                    <form action="" method="GET">
-                        <input type="text" placeholder="Type the name here" name="search" class="form-control">
-                </div>
-
-
-                <button type="submit" value="Search" name="btn" class="btn btn-sm btn-primary">
-                    <i class="fa fa-search"></i>
-                </button>
-
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="view-car.php" class="btn btn-outline-success">View All</a>
-
-                </form>
-            </div>
-            <br>
 
             <table class="table table-hover">
                 <thead>
@@ -66,11 +46,16 @@ $result = $dbconn->query($sql);
                     </tr>
                 </thead>
                 <tbody>
-                    <?php
-			if ($result->num_rows > 0) {
-				while ($row = $result->fetch_assoc()) {
-		?>
 
+                    <?php
+include "includes/dbconfig.php";
+			if (isset($_POST['submit'])){
+				
+				$from=date('Y-m-d',strtotime($_POST['from']));
+				$to=date('Y-m-d',strtotime($_POST['to']));
+                $oquery=$dbconn->query("select * from `booking` where bookingdate between '$from' and '$to'");
+				while($row = $oquery->fetch_array()){
+					?>
                     <tr>
                         <td><?php echo $row['bookingid']; ?></td>
                         <td><?php echo $row['car_image']; ?></td>
@@ -86,26 +71,25 @@ $result = $dbconn->query($sql);
                         <td><?php echo $row['bookingdate']; ?></td>
                         <td><?php echo $row['actual_returndate']; ?></td>
                         <td><?php echo $row['amount']; ?></td>
-
-                        <td><a class="btn btn-info"
-                                href="update-booking.php?bookingid=<?php echo $row['bookingid']; ?>"><i
-                                    class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
-
-                        <td><a class="btn btn-danger"
-                                href="delete-booking.php?bookingid=<?php echo $row['bookingid']; ?>"><i
-                                    class="fa fa-trash-o" aria-hidden="true"></i></a></td>
                     </tr>
-
-                    <?php		}
+                    <?php echo $result; ?>
+                    <?php 
+				}
 			}
 		?>
-
                 </tbody>
             </table>
         </div>
 
     </div>
 </div>
+</div>
+
+<!-- get data betwee dates -->
+
+</div>
+
 
 
 <?php include 'includes/footer.php';?>
+

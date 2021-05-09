@@ -1,5 +1,7 @@
+
 <?php include 'includes/header.php'; ?>
 <?php include 'includes/navbar.php'; ?>
+<?php include 'includes/sidebar.php'; ?>
 
 <?php
 include "includes/dbconfig.php";
@@ -24,14 +26,13 @@ if (isset($_POST['update'])) {
 	$insurancecharge = $_POST['insurancecharge'];
 	$details = $_POST['details'];
 	$branch = $_POST['branch'];
-	$image = $_FILES['image'];
+	//$image = $_FILES['image'];
 	$available = $_POST['available'];
 
-	// $image = $_FILES['image']['name'];
+	$image = $_FILES['image']['name'];
     
      $image_tmp = $_FILES['image']['tmp_name'];
-	 move_uploaded_file($image_tmp,"car_images/".$image);
-
+     move_uploaded_file($image_tmp,"car_images/".$image);
 
 	$sql = "UPDATE `car` SET `category`='$category', `brand`='$brand', `model`='$model', `carname`='$carname', `type`='$type', `seatingcapacity`='$seatingcapacity', `plateno`='$plateno', `fueltype`='$fueltype', `fuelcapacity`='$fuelcapacity', `manufactureyr`='$manufactureyr', `colour`='$colour', `hourlycharge`='$hourlycharge', `dailycharge`='$dailycharge', `weeklycharge`='$weeklycharge', `monthlycharge`='$monthlycharge', `insurancecharge`='$insurancecharge', `details`='$details', `branch`='$branch', `image`='$image', `available`='$available' WHERE `carid`='$carid'";
 
@@ -89,7 +90,7 @@ if (isset($_GET['carid'])) {
 
 			<div class="container container-stl">
 
-				<form action="" method="POST">
+				<form action="" method="POST" enctype="multipart/form-data">
 
 					<div class="row">
 						<div class="col">
@@ -167,7 +168,7 @@ if (isset($_GET['carid'])) {
 
 							<label for="" class="form-label">Image</label>
 							<img src="car_images/<?php echo $image; ?>"  class="preview">
-							<input type="file" class="form-control" name="image" value="car_images/<?php echo $image; ?>"><br>
+							<input type="file" class="form-control" name="image" id="image" value="<?php echo $image; ?>"><br>
 
 							<label for="" class="form-label">Availability</label><br>
 							<input type="radio" style="padding: 10px;" class="form-check-input mt-0" name="available" value="yes" <?php if ($available == 'yes') {
@@ -180,7 +181,7 @@ if (isset($_GET['carid'])) {
 
 							<br><br>
 							<input type="submit" value="Update" name="update" class="btn btn-info">
-							<a type="button" class="btn btn-secondary" href="viewrentdata.php">Vew All Rental Details >></a>
+							<a type="button" class="btn btn-secondary" href="view-car.php">Vew All car Details >></a>
 							<br><br>
 							</fieldset>
 				</form>

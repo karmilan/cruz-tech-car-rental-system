@@ -10,7 +10,9 @@ if (isset($_GET['insuranceid'])) {
 	$result = $dbconn->query($sql);
 
 	if ($result == TRUE) {
-		echo '<script>alert("Insurance Deleted Successfully")</script>';
+		echo '<script>alert("Insurance Deleted Successfully")
+		window.location = "view-insurance.php";
+		</script>';
 	}else{
 		echo "Error:" . $sql . "<br>" . $dbconn->error;
 	}

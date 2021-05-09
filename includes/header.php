@@ -11,13 +11,17 @@
 <link rel="stylesheet" href="css/all.min.css">
 <link rel="stylesheet" href="css/all.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css">
 
 <link rel="stylesheet" href="../css/style.css">
 <script src="https://use.fontawesome.com/9efc700527.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
     <div class="bgimg">
+    <?php include('session.php'); ?>
+
        
 
 <!-- <header>

@@ -1,3 +1,5 @@
+
+
 <header>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
@@ -22,7 +24,20 @@
         
       </ul>
     </div>
-    <a type="button" class="btn btn-outline-info" href="logout.php">Logout</a>
+    <!-- <a type="button" class="btn btn-outline-info" href="logout.php">Logout</a> -->
+    
+
+<div class="dropdownbtn" style="position: relative;">
+<a class="nav-link dropdown-toggle btn btn-dark btn-lg" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-cog" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item"  href="#">Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="logout.php">Logout</a>
+        </div>
+        </div>
+
 
   </div>
 </nav>

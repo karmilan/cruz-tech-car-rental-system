@@ -44,7 +44,8 @@ $result = $dbconn->query($sql);
 
 	<div class="container">
 		
-		<div style="overflow-x:auto; overflow-y:auto;">
+	<div class="tbl-style">
+
 <table class="table table-hover">
 	<thead>
 		<tr>

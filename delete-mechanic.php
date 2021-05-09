@@ -10,7 +10,9 @@ if (isset($_GET['mechanicid'])) {
 	$result = $dbconn->query($sql);
 
 	if ($result == TRUE) {
-		echo '<script>alert("Mechanic Deleted Successfully")</script>';
+		echo '<script>alert("Mechanic Deleted Successfully")
+		window.location = "view-insurance.php";
+		</script>';
 	}else{
 		echo "Error:" . $sql . "<br>" . $dbconn->error;
 	}

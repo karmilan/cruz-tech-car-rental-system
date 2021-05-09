@@ -19,16 +19,15 @@ $result = $dbconn->query($sql);
 
 <div class="row">
     <h2>Car Details</h2>
-    <div class="col">
-        
+    
         <?php
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-        ?>
-                
-                <div class="card" style="width: 17rem; display: inline-block; margin: 10px;">
-                    <img src="car_images/<?php echo $row['image']; ?>" class="card-img-top" alt="...">
-                    <div class="card-body">
+        ?>  <div class="col-4">
+                <div class="card-group">
+                <div class="card edcard">
+                    <img src="car_images/<?php echo $row['image']; ?>" class="card-img-top booking-preview">
+                    <div class="card-body" style="padding-top: 15rem;">
                         <h5 class="card-title"><?php echo $row['carname']; ?></h5>
                         <p class="card-text">Brand: <?php echo $row['brand']; ?></p>
                         <p class="card-text">Type: <?php echo $row['type']; ?></p>
@@ -36,6 +35,8 @@ $result = $dbconn->query($sql);
                         <a class="btn btn-info"  href="add-car-booking.php?carid=<?php echo $row['carid']; ?>">Book</a>
                     </div>
                 </div> 
+            </div>
+            </div>
 
 
 
@@ -45,7 +46,7 @@ $result = $dbconn->query($sql);
         }
         ?>
         
-    </div>
+   
 </div>
 </div>
 

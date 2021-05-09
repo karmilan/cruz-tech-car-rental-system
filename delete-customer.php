@@ -10,7 +10,9 @@ if (isset($_GET['cust_id'])) {
 	$result = $dbconn->query($sql);
 
 	if ($result == TRUE) {
-		echo "Record deleted successfully.";
+		echo '<script>alert("Customer Deleted Successfuly")
+		window.location = "view-customer.php";
+		</script>';
 	}else{
 		echo "Error:" . $sql . "<br>" . $dbconn->error;
 	}

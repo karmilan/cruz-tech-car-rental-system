@@ -185,9 +185,8 @@ echo $hour; echo "<br>";
                 <div class="col-6">
 
                     <br>
-                    <label for="" class="form-label">Car img</label>
-                    <img src="car_images/<?php echo $image; ?>" class="card-img-top" alt="..." >
-                    <br>
+                    <img src="car_images/<?php echo $image; ?>" class="bookingpreview" alt="..." >
+                    <br><br><br>
 
                     <label for="" class="form-label">Car Name</label>
                     <input type="text" class="form-control" name="car_name" value="<?php echo $carname; ?>" readonly><br>
@@ -224,8 +223,8 @@ echo $hour; echo "<br>";
 
                    
 
-                    <!-- <label for="" class="form-label">Amount</label>
-                    <input type="text" class="form-control" name="amount" value=""><br> -->
+                    <!-- <label for="" class="form-label">Amount</label> -->
+                    <input type="text" class="form-control" name="amount" value="" hidden><br>
 
 
                     <input type="submit" name="submit" value="Add" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

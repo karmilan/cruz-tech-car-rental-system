@@ -10,7 +10,9 @@ if (isset($_GET['carid'])) {
 	$result = $dbconn->query($sql);
 
 	if ($result == TRUE) {
-		echo '<script>alert("Car Deleted Successfuly")</script>';
+		echo '<script>alert("Car Deleted Successfuly")
+		window.location = "view-car.php";
+		</script>';
 	}else{
 		echo "Error:" . $sql . "<br>" . $dbconn->error;
 	}

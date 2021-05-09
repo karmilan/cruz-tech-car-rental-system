@@ -29,13 +29,10 @@ if (isset($_POST['submit'])) {
    // $image = $_POST['image'];
    $available = $_POST['available'];
 
-   //   $targetpath = "../car_images/";
     $image = $_FILES['image']['name'];
-    
+   //  $uploads_dir = '/car_images';
      $image_tmp = $_FILES['image']['tmp_name'];
-
-   //   move_uploaded_file($_FILES ['image']['tmp_name'],$targetpath);
-   //   move_uploaded_file($file_tmp, "driverimg/" . $file_name);
+   //   move_uploaded_file($image_tmp,"$uploads_dir/$image");
      move_uploaded_file($image_tmp,"car_images/".$image);
 
 
@@ -102,7 +99,13 @@ if (isset($_POST['submit'])) {
                <input type="text" class="form-control" name="plateno"><br>
 
                <label for="" class="form-label">Fuel Type</label>
-               <input type="text" class="form-control" name="fueltype"><br>
+               <select class="form-control" name="fueltype">
+                  <option value="Petrol">Petrol</option>
+                  <option value="Diesel">Diesel</option>
+                  <option value="Gasoline">Gasoline</option>
+               </select>
+
+               <br>
 
                <label for="" class="form-label">Fuel Capacity</label>
                <input type="text" class="form-control" name="fuelcapacity"><br>

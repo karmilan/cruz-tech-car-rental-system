@@ -59,10 +59,10 @@ include "includes/dbconfig.php";
 <input type="text" class="form-control" name="fullname"><br>
 
 <label for="" class="form-label">Telephone No</label>
-<input type="text" class="form-control" name="telephone_no"><br>
+<input type="text" class="form-control" name="telephone_no" pattern="^\d{10}$"><br>
 
 <label for="" class="form-label">Mobile No</label>
-<input type="text" class="form-control" name="mobile_no"><br>
+<input type="text" class="form-control" name="mobile_no" pattern="^\d{10}$"><br>
 
 <label for="" class="form-label">Street No</label>
 <input type="text" class="form-control" name="street_no"><br>
