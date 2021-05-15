@@ -26,13 +26,10 @@ if (isset($_POST['submit'])) {
    $insurancecharge = $_POST['insurancecharge'];
    $details = $_POST['details'];
    $branch = $_POST['branch'];
-   // $image = $_POST['image'];
    $available = $_POST['available'];
 
     $image = $_FILES['image']['name'];
-   //  $uploads_dir = '/car_images';
      $image_tmp = $_FILES['image']['tmp_name'];
-   //   move_uploaded_file($image_tmp,"$uploads_dir/$image");
      move_uploaded_file($image_tmp,"car_images/".$image);
 
 

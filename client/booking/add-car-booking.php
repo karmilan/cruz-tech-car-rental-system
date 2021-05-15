@@ -1,14 +1,47 @@
-<?php
-   include('session.php');
-?>
-<?php include 'includes/header.php'; ?>
-<?php include 'includes/dbconfig.php'; ?>
-<?php include 'includes/navbar.php'; ?>
-<?php include 'includes/sidebar.php'; ?>
+
+<?php include './client/includes/header.php'; ?>
+<?php include "../../client/includes/navbar.php"; ?>
+<?php include '../../client/includes/dbconfig.php'; ?>
 
 
 <?php
 // include "includes/dbconfig.php";
+
+// if (isset($_POST['update'])) {
+//     $carid = $_POST['carid'];
+//     $category = $_POST['category'];
+//     $brand = $_POST['brand'];
+//     $model = $_POST['model'];
+//     $carname = $_POST['carname'];
+//     $type = $_POST['type'];
+//     $seatingcapacity = $_POST['seatingcapacity'];
+//     $plateno = $_POST['plateno'];
+//     $fueltype = $_POST['fueltype'];
+//     $fuelcapacity = $_POST['fuelcapacity'];
+//     $manufactureyr = $_POST['manufactureyr'];
+//     $colour = $_POST['colour'];
+//     $hourlycharge = $_POST['hourlycharge'];
+//     $dailycharge = $_POST['dailycharge'];
+//     $weeklycharge = $_POST['weeklycharge'];
+//     $monthlycharge = $_POST['monthlycharge'];
+//     $insurancecharge = $_POST['insurancecharge'];
+//     $details = $_POST['details'];
+//     $branch = $_POST['branch'];
+//     $image = $_POST['image'];
+//     $available = $_POST['available'];
+
+
+//     // $sql = "UPDATE `car` SET `category`='$category', `brand`='$brand', `model`='$model', `carname`='$carname', `type`='$type', `seatingcapacity`='$seatingcapacity', `plateno`='$plateno', `fueltype`='$fueltype', `fuelcapacity`='$fuelcapacity', `manufactureyr`='$manufactureyr', `colour`='$colour', `hourlycharge`='$hourlycharge', `dailycharge`='$dailycharge', `weeklycharge`='$weeklycharge', `monthlycharge`='$monthlycharge', `insurancecharge`='$insurancecharge', `details`='$details', `branch`='$branch', `image`='$image', `available`='$available' WHERE `carid`='$carid'";
+
+//     $result = $dbconn->query($sql);
+
+//     if ($result == TRUE) {
+//         echo '<script>alert("Car Updated Successfully")</script>';
+//     } else {
+//         echo "Error:" . $sql . "<br>" . $dbconn->error;
+//     }
+// }
+
 
 if (isset($_GET['carid'])) {
     $carid = $_GET['carid'];
@@ -91,15 +124,11 @@ if (isset($_POST['submit'])) {
     $car_model = $_POST['car_model'];
     $car_seatingcapacity = $_POST['car_seatingcapacity'];
     $cust_drivinglicenseno = $_POST['cust_drivinglicenseno'];
-    $driver_licenseno = $_POST['driver_licenseno'];
     $car_dailycharge = $_POST['car_dailycharge'];
     $car_monthlycharge = $_POST['car_monthlycharge'];
     $bookingdate = $_POST['bookingdate'];
     $actual_returndate = $_POST['actual_returndate'];
     $car_hourlycharge = $_POST['car_hourlycharge'];
-    $status = $_POST['status'];
-    $comment = $_POST['comment'];
-    $payment = $_POST['payment'];
     // $amount = $_POST['car_dailycharge'] * $bookingdays;
     
     $date1=date_create($bookingdate);
@@ -110,9 +139,9 @@ $month=$diff->format("%m");
 $days=$diff->format("%d");
 $hour=$diff->format("%h");
 
-$mcharge=$car_monthlycharge*$month+($month*20000);
-$dcharge=$car_dailycharge*$days+($days*1000);
-$hcharge=$hourlycharge*$hour+($hour*300);
+$mcharge=$car_monthlycharge*$month;
+$dcharge=$car_dailycharge*$days;
+$hcharge=$hourlycharge*$hour;
 $tot=$mcharge+$dcharge+$hcharge;
 $amount = $_POST['amount'].$tot;
 
@@ -122,13 +151,13 @@ echo $hour; echo "<br>";
 
 
 
-    $sql = "INSERT INTO `booking`(`car_image`,`car_name`, `car_category`, `car_brand`, `car_model`,`car_seatingcapacity`, `cust_drivinglicenseno`,`driver_licenseno`, `car_dailycharge`,`car_monthlycharge`,`bookingdate`,`actual_returndate`,`car_hourlycharge`,`status`,`comment`,`payment`, `amount`) VALUES ('$car_image','$car_name','$car_category','$car_brand','$car_model','$car_seatingcapacity','$cust_drivinglicenseno','$driver_licenseno','$car_dailycharge','$car_monthlycharge','$bookingdate','$actual_returndate','$car_hourlycharge','$status','$comment','$payment','$amount')";
+    $sql = "INSERT INTO `booking`(`car_image`,`car_name`, `car_category`, `car_brand`, `car_model`,`car_seatingcapacity`, `cust_drivinglicenseno`, `car_dailycharge`,`car_monthlycharge`,`bookingdate`,`actual_returndate`,`car_hourlycharge`, `amount`) VALUES ('$car_image','$car_name','$car_category','$car_brand','$car_model','$car_seatingcapacity','$cust_drivinglicenseno','$car_dailycharge','$car_monthlycharge','$bookingdate','$actual_returndate','$car_hourlycharge','$amount')";
 
 
     $result = $dbconn->query($sql);
 
     if ($result == TRUE) {
-        echo '<script>alert("New Booking Added with Driver Successfully")</script>';
+        echo '<script>alert("New Booking Added Successfully")</script>';
         
 
     } else {
@@ -144,7 +173,7 @@ echo $hour; echo "<br>";
 
 
 <div class="content-main">
-    <h3>Book a Car with Driver</h3>
+    <h3>Book a Car</h3>
 
     <div class="container container-stl">
 
@@ -184,25 +213,13 @@ echo $hour; echo "<br>";
                     <label for="" class="form-label">Customer License No</label>
                     <input type="text" class="form-control" name="cust_drivinglicenseno"><br>
 
-                    <label for="" class="form-label">Driver License No</label>
-                    <input type="text" class="form-control" name="driver_licenseno"><br>
-
                     <label for="" class="form-label">Booking Date</label>
                     <input type="datetime-local" name="bookingdate" class="form-control"><br>
 
                     <label for="" class="form-label">Return Date</label>
                     <input type="datetime-local" name="actual_returndate" class="form-control"><br>
 
-                    <label for="" class="form-label">Status</label><br>
-                    <input type="radio" style="padding: 10px;" class="form-check-input mt-0" name="status" value="confirmed">Confirmed
-
-               <input type="radio" style="padding: 10px;" class="form-check-input mt-0" name="status" value="pending">Pending<br><br>
-
-                    <label for="" class="form-label">Comment</label>
-                    <input type="text" class="form-control" name="comment"><br>
-
-                    <label for="" class="form-label">Payment</label>
-                    <input type="text" class="form-control" name="payment"><br>
+                   
 
                     <!-- <label for="" class="form-label">Amount</label> -->
                     <input type="text" class="form-control" name="amount" value="" hidden><br>
@@ -225,4 +242,4 @@ echo $hour; echo "<br>";
 
 </div>
 
-<?php include 'includes/footer.php'; ?>
+<?php include $client_header ; ?>

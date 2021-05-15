@@ -131,6 +131,11 @@ if (isset($_POST['submit'])) {
     $bookingdate = $_POST['bookingdate'];
     $actual_returndate = $_POST['actual_returndate'];
     $car_hourlycharge = $_POST['car_hourlycharge'];
+    $status = $_POST['status'];
+    $comment = $_POST['comment'];
+    $payment = $_POST['payment'];
+
+    
     // $amount = $_POST['car_dailycharge'] * $bookingdays;
     
     $date1=date_create($bookingdate);
@@ -153,7 +158,7 @@ echo $hour; echo "<br>";
 
 
 
-    $sql = "INSERT INTO `booking`(`car_image`,`car_name`, `car_category`, `car_brand`, `car_model`,`car_seatingcapacity`, `cust_drivinglicenseno`, `car_dailycharge`,`car_monthlycharge`,`bookingdate`,`actual_returndate`,`car_hourlycharge`, `amount`) VALUES ('$car_image','$car_name','$car_category','$car_brand','$car_model','$car_seatingcapacity','$cust_drivinglicenseno','$car_dailycharge','$car_monthlycharge','$bookingdate','$actual_returndate','$car_hourlycharge','$amount')";
+    $sql = "INSERT INTO `booking`(`car_image`,`car_name`, `car_category`, `car_brand`, `car_model`,`car_seatingcapacity`, `cust_drivinglicenseno`, `car_dailycharge`,`car_monthlycharge`,`bookingdate`,`actual_returndate`,`car_hourlycharge`,`status`,`comment`,`payment`, `amount`) VALUES ('$car_image','$car_name','$car_category','$car_brand','$car_model','$car_seatingcapacity','$cust_drivinglicenseno','$car_dailycharge','$car_monthlycharge','$bookingdate','$actual_returndate','$car_hourlycharge','$status','$comment','$payment','$amount')";
 
 
     $result = $dbconn->query($sql);
@@ -221,7 +226,17 @@ echo $hour; echo "<br>";
                     <label for="" class="form-label">Return Date</label>
                     <input type="datetime-local" name="actual_returndate" class="form-control"><br>
 
-                   
+                    <label for="" class="form-label">Status</label><br>
+                    <input type="radio" style="padding: 10px;" class="form-check-input mt-0" name="status" value="confirmed">Confirmed
+
+               <input type="radio" style="padding: 10px;" class="form-check-input mt-0" name="status" value="pending">Pending<br><br>
+
+                    <label for="" class="form-label">Comment</label>
+                    <input type="text" class="form-control" name="comment"><br>
+
+                    <label for="" class="form-label">Payment</label>
+                    <input type="text" class="form-control" name="payment"><br>
+
 
                     <!-- <label for="" class="form-label">Amount</label> -->
                     <input type="text" class="form-control" name="amount" value="" hidden><br>

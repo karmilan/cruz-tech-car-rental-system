@@ -1,14 +1,11 @@
-<?php
-   include('session.php');
-?>
-<?php include 'includes/header.php'; ?>
+
 <?php include 'includes/dbconfig.php'; ?>
+<?php include 'includes/header.php'; ?>
 <?php include 'includes/navbar.php'; ?>
-<?php include 'includes/sidebar.php'; ?>
 
 
 <?php
-// include "includes/dbconfig.php";
+include "includes/dbconfig.php";
 
 if (isset($_GET['carid'])) {
     $carid = $_GET['carid'];
@@ -80,6 +77,52 @@ if (isset($_GET['carid'])) {
 ?>
 
 
+<!-- customer -->
+
+
+<?php
+include "includes/dbconfig.php";
+
+if (isset($_POST['submit'])) {
+    $fullname = $_POST['fullname'];
+    $telephone_no = $_POST['telephone_no'];
+    $mobile_no = $_POST['mobile_no'];
+    $street_no = $_POST['street_no'];
+    $passport_no = $_POST['passport_no'];
+    $driving_license_no = $_POST['driving_license_no'];
+    $nationality = $_POST['nationality'];
+    $reference_name = $_POST['reference_name'];
+    $job_details = $_POST['job_details'];
+    $address = $_POST['address'];
+    $location = $_POST['location'];
+    $passport_expiry_date = $_POST['passport_expiry_date'];
+    $driving_license_expiry_date = $_POST['driving_license_expiry_date'];
+    $how_did_know = $_POST['how_did_know'];
+    $reference_no = $_POST['reference_no'];
+    $premium_customer = $_POST['premium_customer'];
+
+
+    $sql = "INSERT INTO `customer`(`fullname`, `telephone_no`, `mobile_no`, `street_no`, `passport_no`, `driving_license_no`, `nationality`, `reference_name`, `job_details`, `address`, `location`, `passport_expiry_date`, `driving_license_expiry_date`, `how_did_know`, `reference_no`, `premium_customer`) VALUES ('$fullname','$telephone_no','$mobile_no','$street_no','$passport_no', '$driving_license_no', '$nationality', '$reference_name','$job_details','$address','$location','$passport_expiry_date', '$driving_license_expiry_date','$how_did_know','$reference_no','$premium_customer')";
+
+
+    $result = $dbconn->query($sql);
+
+    if ($result == TRUE) {
+        echo "New record created successfully.";
+    } else {
+        echo "Error insertttt:" . $sql . "<br>" . $dbconn->error;
+    }
+
+
+    mysqli_close($dbconn);
+}
+
+?>
+
+
+<!-- customer end -->
+
+
 <?php
 include "includes/dbconfig.php";
 
@@ -90,6 +133,7 @@ if (isset($_POST['submit'])) {
     $car_brand = $_POST['car_brand'];
     $car_model = $_POST['car_model'];
     $car_seatingcapacity = $_POST['car_seatingcapacity'];
+
     $cust_drivinglicenseno = $_POST['cust_drivinglicenseno'];
     $driver_licenseno = $_POST['driver_licenseno'];
     $car_dailycharge = $_POST['car_dailycharge'];
@@ -99,7 +143,6 @@ if (isset($_POST['submit'])) {
     $car_hourlycharge = $_POST['car_hourlycharge'];
     $status = $_POST['status'];
     $comment = $_POST['comment'];
-    $payment = $_POST['payment'];
     // $amount = $_POST['car_dailycharge'] * $bookingdays;
     
     $date1=date_create($bookingdate);
@@ -116,13 +159,8 @@ $hcharge=$hourlycharge*$hour+($hour*300);
 $tot=$mcharge+$dcharge+$hcharge;
 $amount = $_POST['amount'].$tot;
 
-echo $month; echo "<br>";
-echo $days; echo "<br>";
-echo $hour; echo "<br>";
 
-
-
-    $sql = "INSERT INTO `booking`(`car_image`,`car_name`, `car_category`, `car_brand`, `car_model`,`car_seatingcapacity`, `cust_drivinglicenseno`,`driver_licenseno`, `car_dailycharge`,`car_monthlycharge`,`bookingdate`,`actual_returndate`,`car_hourlycharge`,`status`,`comment`,`payment`, `amount`) VALUES ('$car_image','$car_name','$car_category','$car_brand','$car_model','$car_seatingcapacity','$cust_drivinglicenseno','$driver_licenseno','$car_dailycharge','$car_monthlycharge','$bookingdate','$actual_returndate','$car_hourlycharge','$status','$comment','$payment','$amount')";
+    $sql = "INSERT INTO `booking`(`car_image`,`car_name`, `car_category`, `car_brand`, `car_model`,`car_seatingcapacity`,`cust_drivinglicenseno`,`driver_licenseno`, `car_dailycharge`,`car_monthlycharge`,`bookingdate`,`actual_returndate`,`car_hourlycharge`,`status`,`comment`, `amount`) VALUES ('$car_image','$car_name','$car_category','$car_brand','$car_model','$car_seatingcapacity','$driving_license_no','$driving_license_no','$car_dailycharge','$car_monthlycharge','$bookingdate','$actual_returndate','$car_hourlycharge','$status','$comment','$amount')";
 
 
     $result = $dbconn->query($sql);
@@ -154,8 +192,8 @@ echo $hour; echo "<br>";
                 <div class="col-6">
 
                     <br>
-                    <img src="car_images/<?php echo $image; ?>" class="bookingpreview" alt="..." >
-                    <br><br><br>
+                    <img src="../car_images/<?php echo $image; ?>" class="bookingpreview" alt="..." >
+                    <br><br>
 
                     <label for="" class="form-label">Car Name</label>
                     <input type="text" class="form-control" name="car_name" value="<?php echo $carname; ?>" readonly><br>
@@ -181,8 +219,8 @@ echo $hour; echo "<br>";
                     <label for="" class="form-label">Car Monthly Charge</label>
                     <input type="text" class="form-control" name="car_monthlycharge" value="<?php echo $monthlycharge; ?>" readonly><br>
 
-                    <label for="" class="form-label">Customer License No</label>
-                    <input type="text" class="form-control" name="cust_drivinglicenseno"><br>
+                    <!-- <label for="" class="form-label">Customer License No</label> -->
+                    <input type="text" class="form-control" name="cust_drivinglicenseno" hidden>
 
                     <label for="" class="form-label">Driver License No</label>
                     <input type="text" class="form-control" name="driver_licenseno"><br>
@@ -193,19 +231,69 @@ echo $hour; echo "<br>";
                     <label for="" class="form-label">Return Date</label>
                     <input type="datetime-local" name="actual_returndate" class="form-control"><br>
 
-                    <label for="" class="form-label">Status</label><br>
-                    <input type="radio" style="padding: 10px;" class="form-check-input mt-0" name="status" value="confirmed">Confirmed
-
-               <input type="radio" style="padding: 10px;" class="form-check-input mt-0" name="status" value="pending">Pending<br><br>
-
                     <label for="" class="form-label">Comment</label>
                     <input type="text" class="form-control" name="comment"><br>
 
-                    <label for="" class="form-label">Payment</label>
-                    <input type="text" class="form-control" name="payment"><br>
+                    <input type="text" name="status" class="form-control" value="pending" hidden>
 
-                    <!-- <label for="" class="form-label">Amount</label> -->
                     <input type="text" class="form-control" name="amount" value="" hidden><br>
+                </div>
+                <div class="col-6">
+
+                            <br>
+                            <label for="" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" name="fullname"><br>
+
+                            <label for="" class="form-label">Telephone No</label>
+                            <input type="text" class="form-control" name="telephone_no" pattern="^\d{10}$"><br>
+
+                            <label for="" class="form-label">Mobile No</label>
+                            <input type="text" class="form-control" name="mobile_no" pattern="^\d{10}$"><br>
+
+                            <label for="" class="form-label">Street No</label>
+                            <input type="text" class="form-control" name="street_no"><br>
+
+                            <label for="" class="form-label">Passport No</label>
+                            <input type="text" class="form-control" name="passport_no"><br>
+
+                            <label for="" class="form-label">Driving License No</label>
+                            <input type="text" class="form-control" name="driving_license_no"><br>
+
+                            <label for="" class="form-label">Nationality</label>
+                            <input type="text" class="form-control" name="nationality"><br>
+
+                            <label for="" class="form-label">Referance Name</label>
+                            <input type="text" class="form-control" name="reference_name"><br>
+
+                            <label for="" class="form-label">Job Details</label>
+                            <input type="text" class="form-control" name="job_details"><br>
+
+                       
+                            <label for="" class="form-label">Address</label>
+                            <input type="text" class="form-control tfield" name="address"><br>
+
+                            <label for="" class="form-label">Location</label>
+                            <input type="text" class="form-control" name="location"><br>
+
+                            <label for="" class="form-label">Passport Expiry Date</label>
+                            <input type="date" class="form-control" name="passport_expiry_date"><br>
+
+                            <label for="" class="form-label">Driving License Expiry Date</label>
+                            <input type="date" class="form-control" name="driving_license_expiry_date"><br>
+
+                            <label for="" class="form-label">How did you know about us?</label>
+                            <input type="text" class="form-control tfield" name="how_did_know"><br>
+
+                            <label for="" class="form-label">Reference No</label>
+                            <input type="text" class="form-control" name="reference_no"><br>
+
+                           <input type="text" name="premium_customer" value="no" hidden>
+                            <br><br>
+                            
+
+                        </div>
+
+
 
 
                     <input type="submit" name="submit" value="Add" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -213,9 +301,9 @@ echo $hour; echo "<br>";
 
                 </div>
 
-                <div class="col-6">
+                <!-- <div class="col-6">
                 <?php include 'view-licenseno.php'; ?>
-                </div>
+                </div> -->
 
 
             </div>

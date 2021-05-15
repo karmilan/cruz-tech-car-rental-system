@@ -86,6 +86,7 @@ if (isset($_POST['update'])) {
     $car_model = $_POST['car_model'];
     $car_seatingcapacity = $_POST['car_seatingcapacity'];
     $cust_drivinglicenseno = $_POST['cust_drivinglicenseno'];
+    $driver_licenseno = $_POST['driver_licenseno'];
     $car_dailycharge = $_POST['car_dailycharge'];
 
     // $amount = $_POST['car_dailycharge']; 
@@ -112,7 +113,7 @@ if (isset($_POST['update'])) {
     $amount = $_POST['amount'].$tot;
 
 
-    $sql = "UPDATE `booking` SET `cust_drivinglicenseno`='$cust_drivinglicenseno', `bookingdate`='$bookingdate',`actual_returndate`='$actual_returndate',`amount`='$amount',`status`='$status',`payment`='$payment' WHERE `bookingid`='$bookingid'";
+    $sql = "UPDATE `booking` SET `cust_drivinglicenseno`='$cust_drivinglicenseno',`driver_licenseno`='$driver_licenseno', `bookingdate`='$bookingdate',`actual_returndate`='$actual_returndate',`amount`='$amount',`status`='$status',`payment`='$payment' WHERE `bookingid`='$bookingid'";
 
     $result = $dbconn->query($sql);
 
@@ -143,6 +144,7 @@ if (isset($_GET['bookingid'])) {
     $car_model = $row['car_model'];
     $car_seatingcapacity = $row['car_seatingcapacity'];
     $cust_drivinglicenseno = $row['cust_drivinglicenseno'];
+    $driver_licenseno = $row['driver_licenseno'];
     $car_dailycharge = $row['car_dailycharge'];
     $car_hourlycharge = $row['car_hourlycharge'];
     $car_monthlycharge = $row['car_monthlycharge'];
@@ -204,6 +206,9 @@ if (isset($_GET['bookingid'])) {
 
                     <label for="" class="form-label">Customer License No</label>
                     <input type="text" class="form-control" name="cust_drivinglicenseno" value="<?php echo $cust_drivinglicenseno; ?>"><br>
+
+                    <label for="" class="form-label">Driver License No</label>
+                    <input type="text" class="form-control" name="driver_licenseno" value="<?php echo $driver_licenseno; ?>"><br>
 
                     <label for="" class="form-label">Booking Date</label>
                     <input type="text" name="bookingdate" class="form-control" value="<?php echo $bookingdate; ?>"><br>

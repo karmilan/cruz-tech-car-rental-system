@@ -1,15 +1,15 @@
 <?php include('session.php'); ?>
 
-<?php include 'includes/header.php';?>
+<?php include 'includes/header.php'; ?>
 <?php include 'includes/navbar.php'; ?>
 <?php include 'includes/sidebar.php'; ?>
 
-<?php 
+<?php
 include "includes/dbconfig.php";
 
-$sql = "SELECT * FROM booking";
+$sql = "SELECT * FROM booking where status='confirmed' ORDER BY bookingtime DESC";
 
-if( isset($_GET['search']) ){
+if (isset($_GET['search'])) {
     $bookingid = mysqli_real_escape_string($dbconn, htmlspecialchars($_GET['search']));
 
     $sql = "SELECT * FROM booking WHERE bookingid ='$bookingid'";
@@ -24,27 +24,28 @@ $result = $dbconn->query($sql);
     <div class="container">
         <h2>Booking Details</h2>
 
-        <div class="tbl-style">
-
-            <div class="input-group">
-                <div class="form-outline">
-
-                    <form action="" method="GET">
-                        <input type="text" placeholder="Type the name here" name="search" class="form-control">
-                </div>
 
 
-                <button type="submit" value="Search" name="btn" class="btn btn-sm btn-primary">
-                    <i class="fa fa-search"></i>
-                </button>
+        <div class="input-group">
+            <div class="form-outline">
 
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="view-booking.php" class="btn btn-outline-success">View All</a>
-
-                </form>
+                <form action="" method="GET">
+                    <input type="text" placeholder="Type the name here" name="search" class="form-control">
             </div>
-            <br>
 
+
+            <button type="submit" value="Search" name="btn" class="btn btn-sm btn-primary">
+                <i class="fa fa-search"></i>
+            </button>
+
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="view-booking.php" class="btn btn-outline-success">View All</a>
+
+            </form>
+        </div>
+        <br>
+
+        <div class="tbl-style">
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -62,43 +63,45 @@ $result = $dbconn->query($sql);
                         <th>Booking Date</th>
                         <th>Return Date</th>
                         <th>Amount</th>
+                        <th>Status</th>
+                        <th>comment</th>
+                        <th>Payment</th>
 
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-			if ($result->num_rows > 0) {
-				while ($row = $result->fetch_assoc()) {
-		?>
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                    ?>
 
-                    <tr>
-                        <td><?php echo $row['bookingid']; ?></td>
-                        <td><?php echo $row['car_image']; ?></td>
-                        <td><?php echo $row['car_name']; ?></td>
-                        <td><?php echo $row['car_category']; ?></td>
-                        <td><?php echo $row['car_brand']; ?></td>
-                        <td><?php echo $row['car_model']; ?></td>
-                        <td><?php echo $row['car_seatingcapacity']; ?></td>
-                        <td><?php echo $row['car_monthlycharge']; ?></td>
-                        <td><?php echo $row['car_dailycharge']; ?></td>
-                        <td><?php echo $row['car_hourlycharge']; ?></td>
-                        <td><?php echo $row['cust_drivinglicenseno']; ?></td>
-                        <td><?php echo $row['bookingdate']; ?></td>
-                        <td><?php echo $row['actual_returndate']; ?></td>
-                        <td><?php echo $row['amount']; ?></td>
+                            <tr>
+                                <td><?php echo $row['bookingid']; ?></td>
+                                <td><?php echo $row['car_image']; ?></td>
+                                <td><?php echo $row['car_name']; ?></td>
+                                <td><?php echo $row['car_category']; ?></td>
+                                <td><?php echo $row['car_brand']; ?></td>
+                                <td><?php echo $row['car_model']; ?></td>
+                                <td><?php echo $row['car_seatingcapacity']; ?></td>
+                                <td><?php echo $row['car_monthlycharge']; ?></td>
+                                <td><?php echo $row['car_dailycharge']; ?></td>
+                                <td><?php echo $row['car_hourlycharge']; ?></td>
+                                <td><?php echo $row['cust_drivinglicenseno']; ?></td>
+                                <td><?php echo $row['bookingdate']; ?></td>
+                                <td><?php echo $row['actual_returndate']; ?></td>
+                                <td><?php echo $row['amount']; ?></td>
+                                <td><?php echo $row['status']; ?></td>
+                                <td><?php echo $row['comment']; ?></td>
+                                <td><?php echo $row['payment']; ?></td>
 
-                        <td><a class="btn btn-info"
-                                href="update-booking.php?bookingid=<?php echo $row['bookingid']; ?>"><i
-                                    class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
+                                <td><a class="btn btn-info" href="update-booking.php?bookingid=<?php echo $row['bookingid']; ?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a></td>
 
-                        <td><a class="btn btn-danger"
-                                href="delete-booking.php?bookingid=<?php echo $row['bookingid']; ?>"><i
-                                    class="fa fa-trash-o" aria-hidden="true"></i></a></td>
-                    </tr>
+                                <td><a class="btn btn-danger" href="delete-booking.php?bookingid=<?php echo $row['bookingid']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a></td>
+                            </tr>
 
-                    <?php		}
-			}
-		?>
+                    <?php        }
+                    }
+                    ?>
 
                 </tbody>
             </table>
@@ -108,4 +111,4 @@ $result = $dbconn->query($sql);
 </div>
 
 
-<?php include 'includes/footer.php';?>
+<?php include 'includes/footer.php'; ?>

@@ -166,16 +166,6 @@
 
 
 
-
-
-            <?php 
-				}
-			}
-            
-		?>
-            <!-- expense calculation end -->
-
-
             <!-- total profit -->
             <div class="col-4">
 
@@ -198,6 +188,17 @@
 
         </div>
         <!-- total profit end -->
+
+
+            <?php 
+				}
+			}
+            
+		?>
+            <!-- expense calculation end -->
+
+
+            
     </div>
 </div>
 

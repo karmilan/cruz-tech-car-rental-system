@@ -16,12 +16,17 @@ body {
 </head>
 <body>
 <div class="sidebar">
+
 <div class="sidenav">
-  <a href="dashboard.php"><i class="fa fa-fw fa-home"></i>Home</a>
-  <a href="add-car.php"><i class="fa fa-car" aria-hidden="true"></i>
+ 
+<img src="../../cruz-tech-car-rental-system/admin_imgs/download.png" class="float-left" alt="...">
+<hr>
+
+  <a class="btn-sm" href="dashboard.php"><i class="fa fa-fw fa-home"></i>Home</a>
+  <a class="btn-sm" href="add-car.php"><i class="fa fa-car" aria-hidden="true"></i>
 Car</a>
 
-<button class="dropdown-btn"><i class="fa fa-fw fa-user"></i>Customer 
+<button class="dropdown-btn btn-sm"><i class="fa fa-fw fa-user"></i>Customer 
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
@@ -44,7 +49,8 @@ Car</a>
   </button>
   <div class="dropdown-container">
     <a href="car-booking.php">Book a Car</a>
-    <a href="#">Booking History</a>
+    <a href="view-inquiry.php">Inquiries</a>
+    <a href="view-booking.php">Booking History</a>
     
   </div>
 

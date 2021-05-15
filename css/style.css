@@ -2,6 +2,10 @@
     
 
 } */
+body{
+     background-color: lightgray;
+    /* background-image: url(../admin_imgs/16708.jpg);    */
+  }
 
 .navbar{
     padding: 0.5rem 2rem;
@@ -40,6 +44,10 @@ h6{
 
 .card{
     background-color: transparent;
+}
+
+p.card-text {
+    margin-bottom: 5px;
 }
 .section{
     background-color: rgba(0, 0, 0, 0.089);
@@ -93,16 +101,20 @@ h6{
 
 .container-stl{
     background-color: lavender;
-    border-radius: 20px;
+    border-radius: 10px;
     margin-bottom: 40px;
 }
 
 footer {
     background-color:#212529;
     bottom: 0;
-    position: fixed;
+    position: relative;
     width: 100%;
     color: whitesmoke;
+    background-image: linear-gradient(to bottom right, purple, #34495e);
+    padding-left: 18rem;
+    height: 35px;
+    display: flex;
 }
 
 .content-main {

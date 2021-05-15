@@ -1,9 +1,172 @@
 .header-logo {
   object-fit: cover;
-  width: 100%;
+  width: 54%;
   position: relative;
   height: 100px;
+  right: -45px;
+    bottom: -20px;
 }
+.nav-bar{
+  position: relative;
+}
+
+marquee{
+  color: white;
+    position: absolute;
+    bottom: -66px;
+}
+.road{
+  /* background-image: url(../caranime/road.jpg); */
+  height: 11rem;
+  /* margin-top: -15rem; */
+  margin-right: -1rem;
+  margin-left: -1rem;
+  animation: road 5s linear infinite;
+  background-repeat: repeat-x;
+  width: 900%;
+  right: 0;
+  right: 0px;
+    left: 0px;
+    object-fit: cover;
+    position: fixed;
+}
+
+@keyframes road
+{
+  100%{
+    transform: translate(-3400px);
+  }
+}
+
+
+.city{
+  background-image: url(../caranime/city.png);
+  height: 250px;
+  width: 314%;
+  position: absolute;
+  bottom: 10px;
+  left: -441px;
+  right: 0px;
+  display: block;
+  background-color: skyblue;
+  /* z-index: 1; */
+  background-repeat: repeat-x;
+  /* animation: city 20s linear infinite; */
+}
+@keyframes city 
+{
+  100%{
+    transform: translateX(-1400px);
+  }
+}
+
+.car{
+  position: absolute;
+    transform: translateX(-50px);
+    animation: car 1s linear infinite;
+}
+@keyframes car
+{
+  100%{
+    transform: translateY(-1px);
+
+  }
+  100%{
+    transform: translateY(1px);
+
+  }
+  0%{
+    transform: translateY(-1px);
+
+  }
+
+}
+
+.wheel{
+  position: absolute;
+  transform: translateX(-50%);
+  bottom: 70px;
+}
+.wheel img{
+  width: 50px;
+  animation: wheel 1s linear infinite;
+}
+
+.back-wheel{
+  left: 30px;
+  position: absolute;
+}
+
+.front-wheel{
+  left: 220px;
+  position: absolute;
+}
+
+@keyframes wheel
+{
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+
+.contact{
+  border-top: 3px dotted orangered;
+  width: 155px;
+  color: orangered;
+}
+.contact p{
+  margin-top: -40px;
+  margin-left: 50px;
+  font-size: 12px;
+}
+
+.hours{
+  background-color: rgba(255, 68, 0, 0.301);
+  border-radius: 10px;
+  padding: 13px;
+}
+
+
+footer {
+  background-color:#212529;
+  bottom: 0;
+  /* position: fixed; */
+  width: 100%;
+  color: whitesmoke;
+}
+
+.preview {
+  width: 100px;
+  height: auto;
+}
+
+.bookingpreview{
+  width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.edcard{
+  width: 17rem;
+    height: 27rem;
+    display: inline-block;
+    /* margin: 0px; */
+    margin-top: 25px;
+}
+
+img.card-img-top.booking-preview {
+  width: 100%;
+  height: 55%;
+  object-fit: cover;
+}
+
+p.card-text {
+  margin-bottom: auto;
+}
+
+
+
 
 
 :root {
@@ -59,7 +222,7 @@ body {
   line-height: 1.5;
   color: #212529;
   text-align: left;
-  background-color: #fff; }
+  background-color:lightslategray }
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
@@ -8133,20 +8296,21 @@ a.text-dark:hover, a.text-dark:focus {
   .table .thead-dark th {
     color: inherit;
     border-color: #dee2e6; } }
-
+/* 
 body {
   font-family: "Poppins", Arial, sans-serif;
   font-size: 16px;
   line-height: 1.8;
   font-weight: normal;
   background: #fafafa;
-  color: gray; }
+  color: gray; } */
 
 a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
   transition: .3s all ease;
-  color: #ff0000; }
+  /* color: #ff0000;  */
+}
   a:hover, a:focus {
     text-decoration: none !important;
     outline: none !important;
@@ -8184,7 +8348,9 @@ h1, h2, h3, h4, h5,
 .ftco-navbar-light {
   background: #252525 !important;
   z-index: 3;
-  padding: 0; }
+  padding: 0;
+  height: 35px;
+}
   @media (max-width: 991.98px) {
     .ftco-navbar-light {
       background: #000 !important;
