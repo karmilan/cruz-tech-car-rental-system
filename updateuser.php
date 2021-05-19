@@ -1,4 +1,9 @@
+<?php include('session.php'); ?>
+
 <?php include 'includes/header.php';?>
+<?php include 'includes/navbar.php'; ?>
+<?php include 'includes/sidebar.php'; ?>
+
 
 <?php 
 include "includes/dbconfig.php";
@@ -47,65 +52,52 @@ if (isset($_GET['userid'])) {
 
 
 
-
-<div class="row">
-<div class="col-4">
-<div class="container container-stl">
-		
-		<form action="" method="post">
-		  <fieldset>
-		    <legend>Update the user </legend>
-		    
-		    <input type="hidden" name="userid" class="form-control" value="<?php echo $userid; ?>">
-		    <br>
-		    
-            <label class="form-label">Full Name:</label><br>
-            <input type="text" name="fullname" class="form-control" value="<?php echo $fullname; ?>">
-            <br>
-            <label class="form-label">Email:</label><br>
-            <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
-            <br>
-            <label class="form-label">Phone No:</label><br>
-            <input type="text" name="phno" class="form-control" value="<?php echo $phno; ?>">
-            <br>
-            <label class="form-label">User Name:</label><br>
-            <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
-            <br>
-            <label class="form-label">Password:</label><br>
-            <input type="password" name="pass" class="form-control" value="<?php echo $pass; ?>">
-            
-            
-            
-		    <br>
-		    
-		    
-		    <input type="submit" value="Update" name="update" class="btn btn-info"><br><br>
-		  </fieldset>
-		</form>
-
-
-</div>
-</div>
-<div class="col-8">
+<div class="content-main">
 <div class="container container-stl">
 
-<?php include 'viewuserdata.php';?>
+    <div class="row">
+        <div class="col-8">
+            
+                <form action="" method="post">
+                    <fieldset>
+                        <legend>Update the user </legend>
 
+                        <input type="hidden" name="userid" class="form-control" value="<?php echo $userid; ?>">
+                        <br>
+
+                        <label class="form-label">Full Name:</label><br>
+                        <input type="text" name="fullname" class="form-control" value="<?php echo $fullname; ?>">
+                        <br>
+                        <label class="form-label">Email:</label><br>
+                        <input type="text" name="email" class="form-control" value="<?php echo $email; ?>">
+                        <br>
+                        <label class="form-label">Phone No:</label><br>
+                        <input type="text" name="phno" class="form-control" value="<?php echo $phno; ?>">
+                        <br>
+                        <label class="form-label">User Name:</label><br>
+                        <input type="text" name="username" class="form-control" value="<?php echo $username; ?>">
+                        <br>
+                        <label class="form-label">Password:</label><br>
+                        <input type="password" name="pass" class="form-control" value="<?php echo $pass; ?>">
+
+
+
+                        <br>
+
+
+                        <input type="submit" value="Update" name="update" class="btn btn-info"><br><br>
+                    </fieldset>
+                </form>
+
+
+            </div>
+        </div>
+
+    </div>
 </div>
-</div>
-</div>
 
 
-
-		
-
-		<!-- </body>
-		</html> -->
-
-
-
-
-	<?php
+<?php
 	} else{
 		header('Location: index.php');
 	}
