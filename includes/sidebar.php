@@ -25,7 +25,7 @@
     object-fit: cover;">
             <hr>
 
-            <a class="btn-sm" href="dashboard.php"><i class="fa fa-fw fa-tachometer"></i>Home</a>
+            <a class="btn-sm" href="index.php"><i class="fa fa-fw fa-tachometer"></i>Home</a>
             <a class="btn-sm" href="add-car.php"><i class="fa fa-car" aria-hidden="true"></i>
                 Car</a>
 
