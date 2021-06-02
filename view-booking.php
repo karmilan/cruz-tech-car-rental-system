@@ -1,4 +1,4 @@
-<?php include('session.php'); ?>
+<!-- <?php include('session.php'); ?> -->
 
 <?php include 'includes/header.php'; ?>
 <?php include 'includes/navbar.php'; ?>
@@ -50,7 +50,8 @@ $result = $dbconn->query($sql);
                 <thead>
                     <tr>
                         <th>Booking ID</th>
-                        <th>Car Image</th>
+                        <th>Booking Type</th>
+                        <th>Customer Name</th>
                         <th>Car Name</th>
                         <th>Car Category</th>
                         <th>Car Brand</th>
@@ -60,6 +61,7 @@ $result = $dbconn->query($sql);
                         <th>Car Daily Charge</th>
                         <th>Car Hourly Charge</th>
                         <th>Customer License No</th>
+                        <th>Driver License No</th>
                         <th>Booking Date</th>
                         <th>Return Date</th>
                         <th>Amount</th>
@@ -77,7 +79,8 @@ $result = $dbconn->query($sql);
 
                             <tr>
                                 <td><?php echo $row['bookingid']; ?></td>
-                                <td><?php echo $row['car_image']; ?></td>
+                                <td><?php echo $row['bookingtype']; ?></td>
+                                <td><?php echo $row['cust_name']; ?></td>
                                 <td><?php echo $row['car_name']; ?></td>
                                 <td><?php echo $row['car_category']; ?></td>
                                 <td><?php echo $row['car_brand']; ?></td>
@@ -87,6 +90,7 @@ $result = $dbconn->query($sql);
                                 <td><?php echo $row['car_dailycharge']; ?></td>
                                 <td><?php echo $row['car_hourlycharge']; ?></td>
                                 <td><?php echo $row['cust_drivinglicenseno']; ?></td>
+                                <td><?php echo $row['driver_licenseno']; ?></td>
                                 <td><?php echo $row['bookingdate']; ?></td>
                                 <td><?php echo $row['actual_returndate']; ?></td>
                                 <td><?php echo $row['amount']; ?></td>

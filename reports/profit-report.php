@@ -1,0 +1,214 @@
+<!-- <?php include('session.php'); ?> -->
+
+<?php include 'includes/header.php';?>
+<?php include "includes/dbconfig.php";?>
+
+<!-- get data betwee dates -->
+<br>
+<div class="content-main">
+    <div class="container-fluid">
+        <img src="../client/images/TUCKTUCKPNGg.png" style="width: 200px; height: 60px;
+    object-fit: cover; margin-left: 55rem; position: absolute;">
+   
+    <h2>Profit Report</h2>
+
+        <form method="POST" id="print-btn">
+
+            <div class="input-group" style="width: 65%; font-size: 20px;">
+                <label class="form-label">From: </label>&nbsp;
+                <input class="form-control" type="date" name="from">&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                <label class="form-label"> To: </label>&nbsp;
+                <input class="form-control" type="date" name="to">&nbsp;
+                <input class="btn btn-success" type="submit" value="Get Data" name="submit">
+
+                <button onclick="window.print();" class="btn btn-primary" id="print-btn">Print</button>
+
+
+            </div>
+
+        </form>
+        <hr>
+
+        <!-- <div class="tbl-style" style="height:18rem;"> -->
+
+            <table class="table table-hover" style="font-size: x-small;">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Customer Name</th>
+                        <th>Car Name</th>
+                        <th>Car Category</th>
+                        <th>Car Brand</th>
+                        <th>Car Model</th>
+                        <th>Seating Capacity</th>
+                        <th>Car Monthly Charge</th>
+                        <th>Car Daily Charge</th>
+                        <th>Car Hourly Charge</th>
+                        <th>Customer License No</th>
+                        <th>Booking Date</th>
+                        <th>Return Date</th>
+                        <th>Amount</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <?php
+// include "includes/dbconfig.php";
+			if (isset($_POST['submit'])){
+				
+				$from=date('Y-m-d',strtotime($_POST['from']));
+				$to=date('Y-m-d',strtotime($_POST['to']));
+                $query=$dbconn->query("select * from `booking` where bookingdate between '$from' and '$to'"); 
+                // $oquery=$dbconn->query("SELECT sum(amount) as total FROM `booking` where bookingdate between '$from' and '$to'");
+				while($row = $query->fetch_array()){
+					?>
+                    <tr>
+                        <td><?php echo $row['bookingid']; ?></td>
+                        <td><?php echo $row['cust_name']; ?></td>
+                        <td><?php echo $row['car_name']; ?></td>
+                        <td><?php echo $row['car_category']; ?></td>
+                        <td><?php echo $row['car_brand']; ?></td>
+                        <td><?php echo $row['car_model']; ?></td>
+                        <td><?php echo $row['car_seatingcapacity']; ?></td>
+                        <td><?php echo $row['car_monthlycharge']; ?></td>
+                        <td><?php echo $row['car_dailycharge']; ?></td>
+                        <td><?php echo $row['car_hourlycharge']; ?></td>
+                        <td><?php echo $row['cust_drivinglicenseno']; ?></td>
+                        <td><?php echo $row['bookingdate']; ?></td>
+                        <td><?php echo $row['actual_returndate']; ?></td>
+                        <td><?php echo $row['amount']; ?></td>
+                    </tr>
+
+                    <?php 
+				}
+			}
+            
+		?>
+                </tbody>
+            </table>
+        <!-- </div> -->
+        <hr>
+
+
+        <!-- get data end -->
+
+
+        <!-- total amount calculaton -->
+        <?php
+			if (isset($_POST['submit'])){
+				
+				$from=date('Y-m-d',strtotime($_POST['from']));
+				$to=date('Y-m-d',strtotime($_POST['to']));
+                // $query=$dbconn->query("select * from `booking` where bookingdate between '$from' and '$to'"); 
+                $oquery=$dbconn->query("SELECT sum(amount) as total FROM `booking` where bookingdate between '$from' and '$to'");
+				while($row = $oquery->fetch_array()){
+					?>
+
+        <?php $total_amount = $row['total']; ?>
+
+        <div class="row">
+
+            <div class="col-4">
+
+                <!-- <div class="card text-white bg-primary mb-3 dashboard-card" style="max-width: 18rem;"> -->
+                    <div class="card-header">Total Amount for Selected Date</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4> Rs.&nbsp;<?php echo $total_amount; ?>
+                                </h4>
+                                <h6>from <?php echo $from; ?> to <?php echo $to; ?></h6>
+                            </div>
+
+                        </div>
+                    </div>
+                <!-- </div> -->
+            </div>
+
+
+
+
+            <?php 
+				}
+			}
+            
+		?>
+
+            <!-- total amount calculaton -->
+
+
+            <!-- expense calculation -->
+            <?php
+			if (isset($_POST['submit'])){
+				
+				$from=date('Y-m-d',strtotime($_POST['from']));
+				$to=date('Y-m-d',strtotime($_POST['to']));
+                $oquery=$dbconn->query("SELECT sum(expenseamount) as total FROM `expense` where expensedate between '$from' and '$to'");
+				while($row = $oquery->fetch_array()){
+					?>
+
+            <?php $expense_amount = $row['total']; ?>
+
+
+
+            <div class="col-4">
+
+                <!-- <div class="card text-white bg-primary mb-3 dashboard-card" style="max-width: 18rem;"> -->
+                    <div class="card-header">Total expense Amount for Selected Date</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4> Rs.&nbsp;<?php echo $expense_amount; ?>
+                                </h4>
+                                <h6>from <?php echo $from; ?> to <?php echo $to; ?></h6>
+                            </div>
+
+                        </div>
+                    </div>
+                <!-- </div> -->
+            </div>
+
+
+
+            <!-- total profit -->
+            <div class="col-4">
+
+                <!-- <div class="card text-white bg-primary mb-3 dashboard-card" style="max-width: 18rem;"> -->
+                    <div class="card-header">Profit for Selected Date</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4> Rs.&nbsp;<?php echo $total_amount-$expense_amount; ?>
+                                </h4>
+                                <h6>from <?php echo $from; ?> to <?php echo $to; ?></h6>
+                            </div>
+
+                        </div>
+                    </div>
+                <!-- </div> -->
+            </div>
+
+
+
+        </div>
+        <!-- total profit end -->
+
+
+            <?php 
+				}
+			}
+            
+		?>
+            <!-- expense calculation end -->
+
+
+            
+    </div>
+</div>
+
+
+
+<?php include 'includes/footer.php';?>

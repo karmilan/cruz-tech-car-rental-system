@@ -1,4 +1,4 @@
-<?php include('session.php'); ?>
+<!-- <?php include('session.php'); ?> -->
 
 <?php include 'includes/header.php';?>
 <?php include 'includes/navbar.php'; ?>
@@ -7,7 +7,7 @@
 <?php 
 include "includes/dbconfig.php";
 
-$sql = "SELECT * FROM driver";
+$sql = "SELECT * FROM driver order by drivercreatetime desc";
 
 if( isset($_GET['search']) ){
     $drivername = mysqli_real_escape_string($dbconn, htmlspecialchars($_GET['search']));

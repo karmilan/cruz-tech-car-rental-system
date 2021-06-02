@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-4">
-                <img src="images/TUCKTUCKPNG.png" style="width: 256px;">
+                <img src="images/TUCKTUCKPNG.png" class="img-fluid" style="width: 256px;">
             </div>
             <div class="col-4">
                 <h3 style="color: white;">Quick Links</h3>

@@ -19,58 +19,69 @@
 
         <div class="sidenav">
 
-            <img src="../../cruz-tech-car-rental-system/admin_imgs/download.png" class="float-left" alt="...">
+            <img src="../../cruz-tech-car-rental-system/client/images/TUCKTUCKPNG.png" class="float-left" style="width: 14rem;
+    margin-left: -26px;
+    margin-top: -70px; height: 100px;
+    object-fit: cover;">
             <hr>
 
-            <a class="btn-sm" href="dashboard.php"><i class="fa fa-fw fa-home"></i>Home</a>
+            <a class="btn-sm" href="dashboard.php"><i class="fa fa-fw fa-tachometer"></i>Home</a>
             <a class="btn-sm" href="add-car.php"><i class="fa fa-car" aria-hidden="true"></i>
                 Car</a>
 
-            <button class="dropdown-btn btn-sm"><i class="fa fa-fw fa-user"></i>Customer
+            <button class="dropdown-btn btn-sm"><i class="fa fa-fw fa-users"></i>Customer
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
                 <a href="add-customer.php">Manage Customers</a>
-                <a href="#">Customer's History</a>
+                <a href="view-customer.php">Customer's History</a>
 
             </div>
 
-            <button class="dropdown-btn"><i class="fa fa-fw fa-home"></i>Driver
+            <button class="dropdown-btn"><i class="fa fa-fw fa-road"></i>Driver
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
                 <a href="add-driver.php">Driver Master</a>
-                <a href="#">Driver History</a>
+                <a href="view-driver.php">Driver History</a>
+                <a href="update-driver-amount.php?da_id=1; ?>">Driver Amount</a>
 
             </div>
 
-            <button class="dropdown-btn"><i class="fa fa-fw fa-home"></i>Booking
+            <button class="dropdown-btn"><i class="fa fa-fw fa-inbox"></i>Inquiries
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-container">
+                <a href="view-inquiry-self-driving.php">Self Driving</a>
+                <a href="view-inquiry-with-driver.php">With Driver</a>
+            </div>
+
+            <button class="dropdown-btn"><i class="fa fa-fw fa-book"></i>Booking
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
                 <a href="car-booking.php">Book a Car</a>
-                <a href="view-inquiry.php">Inquiries</a>
+                <!-- <a href="view-inquiry.php">Inquiries</a> -->
                 <a href="view-booking.php">Booking History</a>
 
             </div>
 
-            <button class="dropdown-btn"><i class="fa fa-fw fa-home"></i>Return Cars
+            <button class="dropdown-btn"><i class="fa fa-fw fa-retweet"></i>Return Cars
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
                 <a href="view-return.php">Return Car</a>
+                <a href="view-return-with-driver.php">Return With Driver</a>
                 <a href="view-return-history.php">Return History</a>
 
             </div>
 
-            <button class="dropdown-btn"><i class="fa fa-fw fa-home"></i>Maintenance
+            <!-- <button class="dropdown-btn"><i class="fa fa-fw fa-home"></i>Maintenance
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
                 <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
-            </div>
+            </div> -->
 
             <!-- <button class="dropdown-btn" href="http://localhost/car-rental/add-mechanic.php"><i class="fa fa-fw fa-home"></i>Mechanic 
     <i class="fa fa-caret-down"></i>
@@ -81,10 +92,10 @@
     <a href="#">Link 3</a>
   </div> -->
 
-            <a href="add-mechanic.php"><i class="fa fa-fw fa-home"></i>Mechanic</a>
+            <a href="add-mechanic.php"><i class="fa fa-fw fa-wrench"></i>Mechanic</a>
 
 
-            <button class="dropdown-btn"><i class="fa fa-fw fa-home"></i>Insurance
+            <button class="dropdown-btn"><i class="fa fa-fw fa-credit-card"></i>Insurance
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
@@ -93,9 +104,9 @@
 
             </div>
 
-            <a href="view-profit2.php"><i class="fa fa-fw fa-home"></i>Profit</a>
+            <a href="view-profit2.php"><i class="fa fa-fw fa-money"></i>Profit</a>
 
-            <button class="dropdown-btn"><i class="fa fa-fw fa-home"></i>Expense
+            <button class="dropdown-btn"><i class="fa fa-fw fa-briefcase"></i>Expense
                 <i class="fa fa-caret-down"></i>
             </button>
 
@@ -105,14 +116,33 @@
                 <a href="#">Expense History</a>
             </div>
 
-            <a href="adduser.php"><i class="fa fa-fw fa-home"></i>Users</a>
+            <?php
+                    include "includes/dbconfig.php";
 
-            <button class="dropdown-btn"><i class="fa fa-fw fa-home"></i>Reports
+                    $sql = "SELECT * FROM user where username = '$user_check' and role='admin'";
+
+                    $result = $dbconn->query($sql);
+
+
+                    ?>
+
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                    ?>
+
+            <a href="adduser.php"><i class="fa fa-fw fa-user"></i>Users</a>
+
+            <?php        }
+                    }
+                    ?>
+
+            <button class="dropdown-btn"><i class="fa fa-fw fa-file-text"></i>Reports
                 <i class="fa fa-caret-down"></i>
             </button>
             <div class="dropdown-container">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
+                <a href="reports/return-history-report.php">Return Details Report</a>
+                <a href="reports/profit-report.php">Profit Report</a>
                 <a href="#">Link 3</a>
             </div>
 

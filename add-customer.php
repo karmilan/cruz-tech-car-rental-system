@@ -110,7 +110,7 @@ include "includes/dbconfig.php";
 <input type="radio" style="padding: 10px;" class="form-check-input mt-0" name="premium_customer" value="no">No
 <br><br>
 <input type="submit" name="submit" value="Add" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<a type="button" class="btn btn-secondary" href="view-customer.php">Vew All Rental Details >></a>
+<a type="button" class="btn btn-secondary" href="view-customer.php">Vew All Customer Details >></a>
 
 </div>
 </div>

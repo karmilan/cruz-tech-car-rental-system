@@ -1,4 +1,3 @@
-
 <?php include 'includes/dbconfig.php'; ?>
 <?php include 'includes/header.php'; ?>
 <?php include 'includes/navbar.php'; ?>
@@ -123,11 +122,41 @@ if (isset($_POST['submit'])) {
 <!-- customer end -->
 
 
+<!-- driver amount -->
+
+<?php 
+include "includes/dbconfig.php";
+
+$sql = "SELECT * FROM driver_amount where `da_id`=1";
+
+$result = $dbconn->query($sql);
+
+			if ($result->num_rows > 0) {
+				while ($row = $result->fetch_assoc()) {
+		
+				
+				  $driver_hourly_charge = $row['driver_hourly_charge']; 
+		 $driver_daily_charge = $row['driver_daily_charge']; 
+				$driver_monthly_charge = $row['driver_monthly_charge']; 
+                   
+                    
+			}
+			}
+
+		?>
+        
+	        	
+
+
+<!-- driver amount end -->
+
+
 <?php
 include "includes/dbconfig.php";
 
 if (isset($_POST['submit'])) {
-    $car_image = $_POST['car_image'];
+    $bookingtype = $_POST['bookingtype'];
+    $cust_name = $_POST['cust_name'];
     $car_name = $_POST['car_name'];
     $car_category = $_POST['car_category'];
     $car_brand = $_POST['car_brand'];
@@ -135,7 +164,7 @@ if (isset($_POST['submit'])) {
     $car_seatingcapacity = $_POST['car_seatingcapacity'];
 
     $cust_drivinglicenseno = $_POST['cust_drivinglicenseno'];
-    $driver_licenseno = $_POST['driver_licenseno'];
+    // $driver_licenseno = $_POST['driver_licenseno'];
     $car_dailycharge = $_POST['car_dailycharge'];
     $car_monthlycharge = $_POST['car_monthlycharge'];
     $bookingdate = $_POST['bookingdate'];
@@ -144,31 +173,29 @@ if (isset($_POST['submit'])) {
     $status = $_POST['status'];
     $comment = $_POST['comment'];
     // $amount = $_POST['car_dailycharge'] * $bookingdays;
-    
-    $date1=date_create($bookingdate);
-$date2=date_create($actual_returndate);
-$diff=date_diff($date1,$date2);
 
-$month=$diff->format("%m");
-$days=$diff->format("%d");
-$hour=$diff->format("%h");
+    $date1 = date_create($bookingdate);
+    $date2 = date_create($actual_returndate);
+    $diff = date_diff($date1, $date2);
 
-$mcharge=$car_monthlycharge*$month+($month*20000);
-$dcharge=$car_dailycharge*$days+($days*1000);
-$hcharge=$hourlycharge*$hour+($hour*300);
-$tot=$mcharge+$dcharge+$hcharge;
-$amount = $_POST['amount'].$tot;
+    $month = $diff->format("%m");
+    $days = $diff->format("%d");
+    $hour = $diff->format("%h");
+
+    $mcharge = $car_monthlycharge * $month + ($month * $driver_monthly_charge);
+    $dcharge = $car_dailycharge * $days + ($days * $driver_daily_charge);
+    $hcharge = $hourlycharge * $hour + ($hour * $driver_hourly_charge);
+    $tot = $mcharge + $dcharge + $hcharge;
+    $amount = $_POST['amount'] . $tot;
 
 
-    $sql = "INSERT INTO `booking`(`car_image`,`car_name`, `car_category`, `car_brand`, `car_model`,`car_seatingcapacity`,`cust_drivinglicenseno`,`driver_licenseno`, `car_dailycharge`,`car_monthlycharge`,`bookingdate`,`actual_returndate`,`car_hourlycharge`,`status`,`comment`, `amount`) VALUES ('$car_image','$car_name','$car_category','$car_brand','$car_model','$car_seatingcapacity','$driving_license_no','$driving_license_no','$car_dailycharge','$car_monthlycharge','$bookingdate','$actual_returndate','$car_hourlycharge','$status','$comment','$amount')";
+    $sql = "INSERT INTO `booking`(`bookingtype`,`cust_name`,`car_name`, `car_category`, `car_brand`, `car_model`,`car_seatingcapacity`,`cust_drivinglicenseno`,`driver_licenseno`, `car_dailycharge`,`car_monthlycharge`,`bookingdate`,`actual_returndate`,`car_hourlycharge`,`status`,`comment`, `amount`) VALUES ('$bookingtype','$fullname','$car_name','$car_category','$car_brand','$car_model','$car_seatingcapacity','$driving_license_no','$driving_license_no','$car_dailycharge','$car_monthlycharge','$bookingdate','$actual_returndate','$car_hourlycharge','$status','$comment','$amount')";
 
 
     $result = $dbconn->query($sql);
 
     if ($result == TRUE) {
         echo '<script>alert("New Booking Added with Driver Successfully")</script>';
-        
-
     } else {
         echo "Error insertttt:" . $sql . "<br>" . $dbconn->error;
     }
@@ -192,7 +219,11 @@ $amount = $_POST['amount'].$tot;
                 <div class="col-6">
 
                     <br>
-                    <img src="../car_images/<?php echo $image; ?>" class="bookingpreview" alt="..." >
+                    <input type="text" class="form-control" name="bookingtype" value="with_driver" hidden>
+
+                    <input type="text" class="form-control" name="cust_name" hidden>
+
+                    <img src="../car_images/<?php echo $image; ?>" class="bookingpreview" alt="...">
                     <br><br>
 
                     <label for="" class="form-label">Car Name</label>
@@ -222,8 +253,8 @@ $amount = $_POST['amount'].$tot;
                     <!-- <label for="" class="form-label">Customer License No</label> -->
                     <input type="text" class="form-control" name="cust_drivinglicenseno" hidden>
 
-                    <label for="" class="form-label">Driver License No</label>
-                    <input type="text" class="form-control" name="driver_licenseno"><br>
+                    <!-- <label for="" class="form-label">Driver License No</label>
+                    <input type="text" class="form-control" name="driver_licenseno"><br> -->
 
                     <label for="" class="form-label">Booking Date</label>
                     <input type="datetime-local" name="bookingdate" class="form-control"><br>
@@ -232,7 +263,7 @@ $amount = $_POST['amount'].$tot;
                     <input type="datetime-local" name="actual_returndate" class="form-control"><br>
 
                     <label for="" class="form-label">Comment</label>
-                    <input type="text" class="form-control" name="comment"><br>
+                    <input type="text" class="form-control" style="padding-top: 9rem;" name="comment"><br>
 
                     <input type="text" name="status" class="form-control" value="pending" hidden>
 
@@ -240,76 +271,76 @@ $amount = $_POST['amount'].$tot;
                 </div>
                 <div class="col-6">
 
-                            <br>
-                            <label for="" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" name="fullname"><br>
+                    <br>
+                    <label for="" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" name="fullname"><br>
 
-                            <label for="" class="form-label">Telephone No</label>
-                            <input type="text" class="form-control" name="telephone_no" pattern="^\d{10}$"><br>
+                    <label for="" class="form-label">Telephone No</label>
+                    <input type="text" class="form-control" name="telephone_no" pattern="^\d{10}$"><br>
 
-                            <label for="" class="form-label">Mobile No</label>
-                            <input type="text" class="form-control" name="mobile_no" pattern="^\d{10}$"><br>
+                    <label for="" class="form-label">Mobile No</label>
+                    <input type="text" class="form-control" name="mobile_no" pattern="^\d{10}$"><br>
 
-                            <label for="" class="form-label">Street No</label>
-                            <input type="text" class="form-control" name="street_no"><br>
+                    <label for="" class="form-label">Street No</label>
+                    <input type="text" class="form-control" name="street_no"><br>
 
-                            <label for="" class="form-label">Passport No</label>
-                            <input type="text" class="form-control" name="passport_no"><br>
+                    <label for="" class="form-label">Passport No</label>
+                    <input type="text" class="form-control" name="passport_no"><br>
 
-                            <label for="" class="form-label">Driving License No</label>
-                            <input type="text" class="form-control" name="driving_license_no"><br>
+                    <label for="" class="form-label">Driving License No</label>
+                    <input type="text" class="form-control" name="driving_license_no"><br>
 
-                            <label for="" class="form-label">Nationality</label>
-                            <input type="text" class="form-control" name="nationality"><br>
+                    <label for="" class="form-label">Nationality</label>
+                    <input type="text" class="form-control" name="nationality"><br>
 
-                            <label for="" class="form-label">Referance Name</label>
-                            <input type="text" class="form-control" name="reference_name"><br>
+                    <label for="" class="form-label">Referance Name</label>
+                    <input type="text" class="form-control" name="reference_name"><br>
 
-                            <label for="" class="form-label">Job Details</label>
-                            <input type="text" class="form-control" name="job_details"><br>
-
-                       
-                            <label for="" class="form-label">Address</label>
-                            <input type="text" class="form-control tfield" name="address"><br>
-
-                            <label for="" class="form-label">Location</label>
-                            <input type="text" class="form-control" name="location"><br>
-
-                            <label for="" class="form-label">Passport Expiry Date</label>
-                            <input type="date" class="form-control" name="passport_expiry_date"><br>
-
-                            <label for="" class="form-label">Driving License Expiry Date</label>
-                            <input type="date" class="form-control" name="driving_license_expiry_date"><br>
-
-                            <label for="" class="form-label">How did you know about us?</label>
-                            <input type="text" class="form-control tfield" name="how_did_know"><br>
-
-                            <label for="" class="form-label">Reference No</label>
-                            <input type="text" class="form-control" name="reference_no"><br>
-
-                           <input type="text" name="premium_customer" value="no" hidden>
-                            <br><br>
-                            
-
-                        </div>
+                    <label for="" class="form-label">Job Details</label>
+                    <input type="text" class="form-control" name="job_details"><br>
 
 
+                    <label for="" class="form-label">Address</label>
+                    <input type="text" class="form-control tfield" name="address"><br>
 
+                    <label for="" class="form-label">Location</label>
+                    <input type="text" class="form-control" name="location"><br>
 
-                    <input type="submit" name="submit" value="Add" class="btn btn-primary">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a type="button" class="btn btn-secondary" href="view-booking.php">Vew All Booking Details >></a><br><br>
+                    <label for="" class="form-label">Passport Expiry Date</label>
+                    <input type="date" class="form-control" name="passport_expiry_date"><br>
+
+                    <label for="" class="form-label">Driving License Expiry Date</label>
+                    <input type="date" class="form-control" name="driving_license_expiry_date"><br>
+
+                    <label for="" class="form-label">How did you know about us?</label>
+                    <input type="text" class="form-control tfield" name="how_did_know"><br>
+
+                    <label for="" class="form-label">Reference No</label>
+                    <input type="text" class="form-control" name="reference_no">
+
+                    <input type="text" name="premium_customer" value="no" hidden>
 
                 </div>
 
-                <!-- <div class="col-6">
+
+
+                <!-- &nbsp;&nbsp;&nbsp;
+                <input type="submit" name="submit" value="Submit Query" class="btn btn-primary" style="margin-top: -27px;"> -->
+               
+                <div class="wrap">
+                    <button type="submit" name="submit" value="Submit" class="buttonn">Submit</button>
+                </div>
+            </div>
+
+            <!-- <div class="col-6">
                 <?php include 'view-licenseno.php'; ?>
                 </div> -->
 
 
-            </div>
-
-        </form>
     </div>
+
+    </form>
+</div>
 
 </div>
 

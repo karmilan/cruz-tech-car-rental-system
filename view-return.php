@@ -1,4 +1,4 @@
-<?php include('session.php'); ?>
+<!-- <?php include('session.php'); ?> -->
 
 <?php include 'includes/header.php'; ?>
 <?php include 'includes/navbar.php'; ?>
@@ -7,7 +7,7 @@
 <?php
 include "includes/dbconfig.php";
 
-$sql = "SELECT * FROM booking where status='confirmed' ORDER BY bookingtime DESC";
+$sql = "SELECT * FROM booking where status='confirmed' and bookingtype='self_driving' ORDER BY bookingtime DESC";
 
 if (isset($_GET['search'])) {
     $bookingid = mysqli_real_escape_string($dbconn, htmlspecialchars($_GET['search']));
@@ -50,7 +50,8 @@ $result = $dbconn->query($sql);
                 <thead>
                     <tr>
                         <th>Booking ID</th>
-                        <th>Car Image</th>
+                        <th>Booking Type</th>
+                        <th>Customer Name</th>
                         <th>Car Name</th>
                         <th>Car Category</th>
                         <th>Car Brand</th>
@@ -77,7 +78,8 @@ $result = $dbconn->query($sql);
 
                             <tr>
                                 <td><?php echo $row['bookingid']; ?></td>
-                                <td><?php echo $row['car_image']; ?></td>
+                                <td><?php echo $row['bookingtype']; ?></td>
+                                <td><?php echo $row['cust_name']; ?></td>
                                 <td><?php echo $row['car_name']; ?></td>
                                 <td><?php echo $row['car_category']; ?></td>
                                 <td><?php echo $row['car_brand']; ?></td>

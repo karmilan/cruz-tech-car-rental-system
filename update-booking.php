@@ -221,7 +221,7 @@ if (isset($_GET['bookingid'])) {
                     <input type="radio" style="padding: 10px;" class="form-check-input mt-0" name="status" value="confirmed" <?php if ($status == 'confirmed') {
 																																		echo "checked";
 																																	} ?>>Confirmed
-							<input type="radio" style="padding: 10px;" class="form-check-input mt-0" name="status" value="no" <?php if ($status == 'pending') {
+							<input type="radio" style="padding: 10px;" class="form-check-input mt-0" name="status" value="pending" <?php if ($status == 'pending') {
 																																		echo "checked";
 																																	} ?>>Pending
 							<br><br>

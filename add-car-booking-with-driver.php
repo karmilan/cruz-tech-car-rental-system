@@ -79,6 +79,30 @@ if (isset($_GET['carid'])) {
 }
 ?>
 
+<!-- driver amount -->
+<?php
+
+if (isset($_GET['da_id'])) {
+    $da_id = $_GET['da_id'];
+
+    $sql = "SELECT * FROM `driver_amount` WHERE `da_id`=1";
+
+    $result = $dbconn->query($sql);
+
+    if ($result->num_rows > 0) {
+
+        while ($row = $result->fetch_assoc()) {
+
+            $da_id = $row['da_id'];
+    $driver_hourly_charge = $row['driver_hourly_charge'];
+    $driver_daily_charge = $row['driver_daily_charge'];
+    $driver_monthly_charge = $row['driver_monthly_charge'];
+        }
+    }}
+?>
+
+<!-- driver amount end -->
+
 
 <?php
 include "includes/dbconfig.php";
@@ -110,9 +134,9 @@ $month=$diff->format("%m");
 $days=$diff->format("%d");
 $hour=$diff->format("%h");
 
-$mcharge=$car_monthlycharge*$month+($month*20000);
-$dcharge=$car_dailycharge*$days+($days*1000);
-$hcharge=$hourlycharge*$hour+($hour*300);
+$mcharge=$car_monthlycharge*$month+($month*$driver_monthly_charge);
+$dcharge=$car_dailycharge*$days+($days*$driver_daily_charge);
+$hcharge=$hourlycharge*$hour+($hour*$driver_hourly_charge);
 $tot=$mcharge+$dcharge+$hcharge;
 $amount = $_POST['amount'].$tot;
 

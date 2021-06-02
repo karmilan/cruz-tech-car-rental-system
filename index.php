@@ -1,103 +1,446 @@
-<?php include "includes/header.php"; ?>
+<?php
+   include('session.php');
+?>
+<?php include 'includes/header.php'; ?>
+<?php include 'includes/navbar.php'; ?>
+<?php include 'includes/sidebar.php'; ?>
+<?php include 'includes/dbconfig.php'; ?>
 
 
 <?php
-include "includes/dbconfig.php";
-session_start();
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-   // username and password sent from form 
+$carquery = "SELECT * FROM car";
 
-   $username = mysqli_real_escape_string($dbconn, $_POST['username']);
-   $pass = mysqli_real_escape_string($dbconn, $_POST['pass']);
+$carresult = mysqli_query($dbconn, $carquery);
 
-   // $username = $_POST['username'];
-   // 		$pass = $_POST['pass'];
+if ($carresult) {
 
-   $sql = "SELECT userid FROM user WHERE username = '$username' and pass = '$pass'";
-   $result = mysqli_query($dbconn, $sql);
-   $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-   // $active = $row['active'];
+    $carrow = mysqli_num_rows($carresult);
 
-   $count = mysqli_num_rows($result);
+    if ($carrow) {
+    }
 
-   // If result matched $myusername and $mypassword, table row must be 1 row
-
-   if ($count == 1) {
-      // session_register("username");
-
-      session_start();
-      //session_start("username");
-      $_SESSION['login_user'] = $username;
-
-      header("location: dashboard.php");
-   } else {
-      echo '<script>alert("invalid User Name or Paaword")</script>';
-   }
+    mysqli_free_result($carresult);
 }
+
+
+$bookingquery = "SELECT * FROM booking";
+
+$bookingresult = mysqli_query($dbconn, $bookingquery);
+
+if ($bookingresult) {
+
+    $bookingrow = mysqli_num_rows($bookingresult);
+
+    if ($bookingrow) {
+    }
+
+    mysqli_free_result($bookingresult);
+}
+
+
+$bookingquery = "SELECT * FROM booking";
+
+$bookingresult = mysqli_query($dbconn, $bookingquery);
+
+if ($bookingresult) {
+
+    $bookingrow = mysqli_num_rows($bookingresult);
+
+    if ($bookingrow) {
+    }
+
+    mysqli_free_result($bookingresult);
+}
+
+
+$customerquery = "SELECT * FROM customer";
+
+$customerresult = mysqli_query($dbconn, $customerquery);
+
+if ($customerresult) {
+
+    $customerrow = mysqli_num_rows($customerresult);
+
+    if ($customerrow) {
+    }
+
+    mysqli_free_result($customerresult);
+}
+
+$mechanicquery = "SELECT * FROM mechanic";
+
+$mechanicresult = mysqli_query($dbconn, $mechanicquery);
+
+if ($mechanicresult) {
+
+    $mechanicrow = mysqli_num_rows($mechanicresult);
+
+    if ($mechanicrow) {
+    }
+
+    mysqli_free_result($mechanicresult);
+}
+
+
+$insurancequery = "SELECT * FROM insurance";
+
+$insuranceresult = mysqli_query($dbconn, $insurancequery);
+
+if ($insuranceresult) {
+
+    $insurancerow = mysqli_num_rows($insuranceresult);
+
+    if ($insurancerow) {
+    }
+
+    mysqli_free_result($insuranceresult);
+}
+
+$userquery = "SELECT * FROM user WHERE role IS NULL";
+
+$userresult = mysqli_query($dbconn, $userquery);
+
+if ($userresult) {
+
+    $userrow = mysqli_num_rows($userresult);
+
+    if ($userrow) {
+    }
+
+    mysqli_free_result($userresult);
+}
+
+mysqli_close($dbconn);
 ?>
 
-<!-- 
-<style type="text/css">
-   body {
-      font-family: Arial, Helvetica, sans-serif;
-      font-size: 14px;
-   }
 
-   label {
-      font-weight: bold;
-      width: 100px;
-      font-size: 14px;
-   }
+<div class="content-main">
+    <div class="container container-stl" style="margin-left: -6rem; width: 120%;padding-right: 9rem;"><br>
 
-   .box {
-      border: #666666 solid 1px;
-   }
-</style>
+        <div class="row">
 
-<body bgcolor="#FFFFFF">
-
-   <div align="center">
-      <div style="width:300px; border: solid 1px #333333; " align="left">
-         <div style="background-color:#333333; color:#FFFFFF; padding:3px;"><b>Login</b></div>
-
-         <div style="margin:30px">
-
-            <form action="" method="post">
-               <label>UserName :</label><input type="text" name="username" class="box" /><br /><br />
-               <label>Password :</label><input type="password" name="pass" class="box" /><br /><br />
-               <input type="submit" value=" Submit " /><br />
-            </form>
-
-
-         </div>
-
-      </div>
-
-   </div>
-</body> -->
-
-
-   <!-- bootstrap login -->
-   <div class="login-body">
-      <div class="container">
-         <div class="row">
             <div class="col-4">
 
-               <form method="post" class="box">
-                  <div class="form-group">
-                     <h1>ADMIN LOGIN</h1>
-                     <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="User Name" name="username">
-                  </div>
-                  <div class="form-group">
-                     <input type="password" class="form-control"  placeholder="Password" name="pass">
-                  </div>
-                  <button type="submit" class="btn btn-primary" value="submit">Submit</button>
-               </form>
+                <div class="card text-white bg-danger mb-3 dashboard-card" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h1> <?php echo $carrow ?>
+                                </h1>
+                                <h4>Available Cars</h4>
+                            </div>
+                            <div class="col-4">
+                                <i class="fa fa-car fa-border" style="border-radius:100%; font-size:46px; margin-top: 14px; margin-left: -10px;" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+
+                <div class="card text-white bg-success mb-3 dashboard-card" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h1> <?php echo $bookingrow ?>
+                                </h1>
+                                <h4>Bookings</h4>
+                            </div>
+                            <div class="col-4">
+                                <i class="fa fa-book fa-border" style="border-radius:100%; font-size:46px; margin-top: 14px; margin-left: -10px;" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+
+                <div class="card text-white bg-primary mb-3 dashboard-card" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h1> <?php echo $customerrow ?>
+                                </h1>
+                                <h4>Customers</h4>
+                            </div>
+                            <div class="col-4">
+                                <i class="fa fa-users fa-border" style="border-radius:100%; font-size:46px; margin-top: 14px; margin-left: -10px;" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-4">
+
+                <div class="card text-white bg-secondary mb-3 dashboard-card" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h1> <?php echo $mechanicrow ?>
+                                </h1>
+                                <h4>Mechanic</h4>
+                            </div>
+                            <div class="col-4">
+                                <i class="fa fa-wrench fa-border" style="border-radius:100%; font-size:46px; margin-top: 14px; margin-left: -10px;" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+
+                <div class="card text-white bg-warning  mb-3 dashboard-card" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h1> <?php echo $insurancerow ?>
+                                </h1>
+                                <h4>insurance</h4>
+                            </div>
+                            <div class="col-4">
+                                <i class="fa fa-handshake fa-border" style="border-radius:100%; font-size:46px; margin-top: 14px; margin-left: -10px;" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+
+                <div class="card text-white bg-info mb-3 dashboard-card" style="max-width: 18rem;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <h1> <?php echo $userrow ?>
+                                </h1>
+                                <h4>Staffs</h4>
+                            </div>
+                            <div class="col-4">
+                                <i class="fa fa-user fa-border" style="border-radius:100%; font-size:46px; margin-top: 14px; margin-left: -10px;" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <br>
+
+        <div class="row">
+            <div class="col">
+
+
+                <form method="POST">
+
+                    <div class="input-group" style="width: 65%; font-size: 20px;">
+                        <label class="form-label">From: </label>&nbsp;
+                        <input class="form-control" type="date" name="from">&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                        <label class="form-label"> To: </label>&nbsp;
+                        <input class="form-control" type="date" name="to">&nbsp;
+                        <input class="btn btn-success" type="submit" value="Get Data" name="submit">
+
+                    </div>
+
+                </form>
+                <hr>
+
+                <div class="tbl-style" style="height:18rem;">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Customer Name</th>
+                                <th>Car Name</th>
+                                <th>Car Category</th>
+                                <th>Car Brand</th>
+                                <th>Car Model</th>
+                                <th>Seating Capacity</th>
+                                <th>Car Monthly Charge</th>
+                                <th>Car Daily Charge</th>
+                                <th>Car Hourly Charge</th>
+                                <th>Customer License No</th>
+                                <th>Booking Date</th>
+                                <th>Return Date</th>
+                                <th>Amount</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php
+                            include "includes/dbconfig.php";
+                            if (isset($_POST['submit'])) {
+
+                                $from = date('Y-m-d', strtotime($_POST['from']));
+                                $to = date('Y-m-d', strtotime($_POST['to']));
+                                $query = $dbconn->query("select * from `booking` where bookingdate between '$from' and '$to'");
+                                // $oquery=$dbconn->query("SELECT sum(amount) as total FROM `booking` where bookingdate between '$from' and '$to'");
+                                while ($row = $query->fetch_array()) {
+                            ?>
+                                    <tr>
+                                        <td><?php echo $row['bookingid']; ?></td>
+                                        <td><?php echo $row['cust_name']; ?></td>
+                                        <td><?php echo $row['car_name']; ?></td>
+                                        <td><?php echo $row['car_category']; ?></td>
+                                        <td><?php echo $row['car_brand']; ?></td>
+                                        <td><?php echo $row['car_model']; ?></td>
+                                        <td><?php echo $row['car_seatingcapacity']; ?></td>
+                                        <td><?php echo $row['car_monthlycharge']; ?></td>
+                                        <td><?php echo $row['car_dailycharge']; ?></td>
+                                        <td><?php echo $row['car_hourlycharge']; ?></td>
+                                        <td><?php echo $row['cust_drivinglicenseno']; ?></td>
+                                        <td><?php echo $row['bookingdate']; ?></td>
+                                        <td><?php echo $row['actual_returndate']; ?></td>
+                                        <td><?php echo $row['amount']; ?></td>
+                                    </tr>
+
+                            <?php
+                                }
+                            }
+
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+
+
+                <!-- get data end -->
+
+
+                <!-- total amount calculaton -->
+                <?php
+                if (isset($_POST['submit'])) {
+
+                    $from = date('Y-m-d', strtotime($_POST['from']));
+                    $to = date('Y-m-d', strtotime($_POST['to']));
+                    // $query=$dbconn->query("select * from `booking` where bookingdate between '$from' and '$to'"); 
+                    $oquery = $dbconn->query("SELECT sum(amount) as total FROM `booking` where bookingdate between '$from' and '$to'");
+                    while ($row = $oquery->fetch_array()) {
+                ?>
+
+                        <?php $total_amount = $row['total']; ?>
+
+                        <div class="row">
+
+                            <div class="col-4">
+
+                                <div class="card text-white bg-primary mb-3 dashboard-card" style="max-width: 18rem;">
+                                    <div class="card-header">Total Amount for Selected Date</div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h4> Rs.&nbsp;<?php echo $total_amount; ?>
+                                                </h4>
+                                                <h6>from <?php echo $from; ?> to <?php echo $to; ?></h6>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                    <?php
+                    }
+                }
+
+                    ?>
+
+                    <!-- total amount calculaton -->
+
+
+                    <!-- expense calculation -->
+                    <?php
+                    if (isset($_POST['submit'])) {
+
+                        $from = date('Y-m-d', strtotime($_POST['from']));
+                        $to = date('Y-m-d', strtotime($_POST['to']));
+                        $oquery = $dbconn->query("SELECT sum(expenseamount) as total FROM `expense` where expensedate between '$from' and '$to'");
+                        while ($row = $oquery->fetch_array()) {
+                    ?>
+
+                            <?php $expense_amount = $row['total']; ?>
+
+
+
+                            <div class="col-4">
+
+                                <div class="card text-white bg-primary mb-3 dashboard-card" style="max-width: 18rem;">
+                                    <div class="card-header">Total expense Amount for Selected Date</div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h4> Rs.&nbsp;<?php echo $expense_amount; ?>
+                                                </h4>
+                                                <h6>from <?php echo $from; ?> to <?php echo $to; ?></h6>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <!-- total profit -->
+                            <div class="col-4">
+
+                                <div class="card text-white bg-primary mb-3 dashboard-card" style="max-width: 18rem;">
+                                    <div class="card-header">Profit for Selected Date</div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
+                                                <h4> Rs.&nbsp;<?php echo $total_amount - $expense_amount; ?>
+                                                </h4>
+                                                <h6>from <?php echo $from; ?> to <?php echo $to; ?></h6>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <!-- total profit end -->
+
+
+                <?php
+                        }
+                    }
+
+                ?>
+                <!-- expense calculation end -->
+
 
             </div>
-         </div>
-      </div>
-   </div>
-   <!-- end bootstrap login -->
+        </div>
 
+
+    </div><br>
+</div>
+
+
+
+<?php include 'includes/footer.php'; ?>

@@ -7,7 +7,7 @@
 <?php 
 include "includes/dbconfig.php";
 
-$sql = "SELECT * FROM customer";
+$sql = "SELECT * FROM customer order by createtime desc";
 
 if( isset($_GET['search']) ){
     $fullname = mysqli_real_escape_string($dbconn, htmlspecialchars($_GET['search']));

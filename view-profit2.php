@@ -1,3 +1,5 @@
+<?php include('session.php'); ?>
+
 <?php include 'includes/header.php';?>
 <?php include "includes/dbconfig.php";?>
 <?php include 'includes/navbar.php'; ?>
@@ -30,7 +32,7 @@
                 <thead>
                     <tr>
                         <th>Booking ID</th>
-                        <th>Car Image</th>
+                        <th>Customer Name</th>
                         <th>Car Name</th>
                         <th>Car Category</th>
                         <th>Car Brand</th>
@@ -60,7 +62,7 @@
 					?>
                     <tr>
                         <td><?php echo $row['bookingid']; ?></td>
-                        <td><?php echo $row['car_image']; ?></td>
+                        <td><?php echo $row['cust_name']; ?></td>
                         <td><?php echo $row['car_name']; ?></td>
                         <td><?php echo $row['car_category']; ?></td>
                         <td><?php echo $row['car_brand']; ?></td>
